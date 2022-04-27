@@ -9,7 +9,6 @@ def visualize_address():
     cedis_locs = cedis_locs[cedis_locs['CEDIS REG'] == 'MONTERREY']
     cedis_location = cedis_locs['coord1'], cedis_locs['coord2']
 
-    figure_ = folium.Figure(width=100, height=100)
     map_ = folium.Map(location=cedis_location, zoom_start=12)
     # Add the specific location of cedis to map_
     folium.Marker(location=cedis_location, popup='Cedis Monterrey', icon=folium.Icon(color='red')).add_to(map_)
