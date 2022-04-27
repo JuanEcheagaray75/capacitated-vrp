@@ -58,12 +58,18 @@ def clean_deliveries(deliveries_db_path: str):
     deliveries_df.to_csv(PROCESSED_DATA_PATH + 'latest-deliveries.csv', index=False)
 
 
+def clean_vehicles(vehicles_db_path: str):
+    vehicles_df = pd.read_excel(vehicles_db_path)
+    
+    # Save it to csv
+    vehicles_df.to_csv(PROCESSED_DATA_PATH + 'vehicles.csv', index=False)
+
 def clean_all_data():
         
     clean_products('./data/raw/sku_DCF_Volumen.xls')
     clean_cedis('./data/raw/direcciones-Cedis-Coppel.xls')
     clean_deliveries('./data/raw/Monterrey-2021.csv')
-
+    clean_vehicles('./data/raw/catalogo-unidades-enero-2022-Cedis.xls')
 
 
 clean_all_data()
