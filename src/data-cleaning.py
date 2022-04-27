@@ -72,4 +72,7 @@ def clean_all_data():
     clean_vehicles('./data/raw/catalogo-unidades-enero-2022-Cedis.xls')
 
 
-clean_all_data()
+if __name__ == '__main__':
+    print('Cleaning data...')
+    clean_all_data()
+    print('Done!')
