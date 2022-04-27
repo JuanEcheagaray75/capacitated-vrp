@@ -16,5 +16,9 @@ def visualize_address():
     map_.save('deliveries_map.html')
 
 
+def visualize_routes():
+    pass
+
+
 if __name__ == '__main__':
     visualize_address()
