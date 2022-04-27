@@ -2,7 +2,7 @@ import pandas as pd
 import os
 from geopy.geocoders import Photon
 from geopy.extra.rate_limiter import RateLimiter
-
+import openrouteservice as ors
 
 
 
@@ -23,22 +23,31 @@ def get_coords(sample_size: float):
     test_data[['latitude', 'longitude', 'altitude']] = pd.DataFrame(test_data['point'].tolist(), index=test_data.index)
 
     test_data.to_csv('data/processed/deliveries-by-address-with-coords.csv', index=False)
-
+    print(f'Proccessed {len(test_data)} addresses')
 
 
 def get_driving_distance():
+    
+    # Get API key for ORS
+    with open(file='api-key.txt', mode='r') as f:
+        api_key = f.read()
+
+    # Compute distance-matrix for all addresses
     pass
 
-
 if __name__ == '__main__':
+
+    sample_size = 1
+
     # Check if the file exists
     if not os.path.isfile('data/processed/deliveries-by-address-with-coords.csv'):
         print('Getting coordinates...')
-        get_coords(0.5)
+        get_coords(sample_size)
         print('Done!')
     
-    else:
-        print('File already exists, skipping...')
+    elif input('File already exists. Do you want to overwrite it? (y/n) ') == 'y':
+        print('Getting coordinates...')
+        get_coords(sample_size)
 
     print('Done!')
 
