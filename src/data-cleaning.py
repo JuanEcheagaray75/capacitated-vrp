@@ -1,4 +1,5 @@
 import pandas as pd
+import re
 
 PROCESSED_DATA_PATH = 'data/processed/'
 
@@ -48,13 +49,28 @@ def clean_deliveries(deliveries_db_path: str):
                                   == deliveries_df['fechaenrutada'].max()]
     deliveries_df.dropna(inplace=True)
 
+    # Process city names
+    deliveries_df.nombreciudad = deliveries_df.nombreciudad.map({
+                            'GUADALUPE': 'Guadalupe',
+                            'CADEREYTA': 'Cadereyta',
+                            'MONTERREY': 'Monterrey',
+                            'SANTA CATARINA': 'Santa Catarina',
+                            'GARCIA': 'García',
+                            'JUAREZ': 'Juárez',
+                            'GENERAL ESCOBED': 'General Escobedo',
+                            'APODACA': 'Apodaca',
+                            'SABINAS HIERRO': 'Sabinal Hidalgo',
+                            'GENERAL ZUAZUA': 'General Zuazua'})
+
+    # Regex for cleaning the address
+
+
     # Proposed full address
-    deliveries_df['full_address'] = deliveries_df['nombrecalle'].str.strip().str.lower() + ',' + \
-        deliveries_df['numerodecasa'].astype(int).astype(str).str.strip() + ',' + \
-        deliveries_df['departamento'].str.strip() + ',' + \
-        deliveries_df['nombreciudad'].str.strip().str.lower() + ',' + \
-        deliveries_df['num_codigopostal'].astype(int).astype(
-            str).str.strip() + ',Nuevo León, México'
+    deliveries_df['full_address'] = deliveries_df['nombrecalle'].str.strip().str.lower() + ' ' + \
+        deliveries_df['numerodecasa'].astype(int).astype(str).str.strip() + ', ' + \
+        deliveries_df['departamento'].str.strip() + ', ' + \
+        deliveries_df['num_codigopostal'].astype(int).astype(str).str.strip() + ', ' +\
+        deliveries_df['nombreciudad'] + ', Nuevo León, México'
 
     # Keep only deliveries, not returns
     deliveries_df = deliveries_df[deliveries_df['cantidad'] > 0]
