@@ -71,12 +71,28 @@ def clean_vehicles(vehicles_db_path: str):
     vehicles_df.to_csv(PROCESSED_DATA_PATH + 'vehicles.csv', index=False)
 
 
+def get_deliveries():
+    deliveries = pd.read_csv(PROCESSED_DATA_PATH + 'latest-deliveries.csv')
+    products = pd.read_csv(PROCESSED_DATA_PATH + 'products.csv')
+
+    products.columns = products.columns.str.replace('Codigo', 'codigo')
+
+    # Merge the two dataframes
+    deliveries = deliveries.merge(products, on='codigo', how='left')
+    deliveries['Vol'] = deliveries['Vol'] * deliveries['cantidad']
+
+    deliveries.groupby('full_address').sum()['Vol'].to_csv(
+        PROCESSED_DATA_PATH + 'deliveries-by-address.csv')
+
+
 def clean_all_data():
 
     clean_products('./data/raw/sku_DCF_Volumen.xls')
     clean_cedis('./data/raw/direcciones-Cedis-Coppel.xls')
     clean_deliveries('./data/raw/Monterrey-2021.csv')
     clean_vehicles('./data/raw/catalogo-unidades-enero-2022-Cedis.xls')
+    print('All data cleaned!, now get the deliveries!')
+    get_deliveries()
 
 
 if __name__ == '__main__':
