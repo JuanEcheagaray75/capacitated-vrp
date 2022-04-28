@@ -1,5 +1,5 @@
 import pandas as pd
-import re
+# import re # Might use it for a different address cleaning structure
 
 PROCESSED_DATA_PATH = 'data/processed/'
 
