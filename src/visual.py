@@ -12,7 +12,10 @@ def visualize_address():
     map_ = folium.Map(location=cedis_location, zoom_start=12)
     # Add the specific location of cedis to map_
     folium.Marker(location=cedis_location, popup='Cedis Monterrey', icon=folium.Icon(color='red')).add_to(map_)
-    deliveries.apply(lambda row: folium.Marker(location=[row['latitude'], row['longitude']], popup=row['full_address']).add_to(map_), axis=1)
+    deliveries.apply(lambda row: folium.Marker(
+                                location=[row['latitude'], 
+                                row['longitude']], popup=row['full_address'] + '\n Volume:' + str(row['Vol'])
+                                ).add_to(map_), axis=1)
     map_.save('deliveries_map.html')
 
 
