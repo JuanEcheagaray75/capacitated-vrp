@@ -62,8 +62,6 @@ def clean_deliveries(deliveries_db_path: str):
                             'SABINAS HIERRO': 'Sabinal Hidalgo',
                             'GENERAL ZUAZUA': 'General Zuazua'})
 
-    # Regex for cleaning the address
-
 
     # Proposed full address
     deliveries_df['full_address'] = deliveries_df['nombrecalle'].str.strip().str.lower() + ' ' + \
