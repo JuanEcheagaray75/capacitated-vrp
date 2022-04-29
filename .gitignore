@@ -4,3 +4,6 @@
 # Data
 *.xls
 *.csv
+
+# Maps
+*.html
