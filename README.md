@@ -1,7 +1,8 @@
-# Coppel VRP
+# Coppel Vehicle Routing Problem
 
-- [Coppel VRP](#coppel-vrp)
+- [Coppel Vehicle Routing Problem](#coppel-vehicle-routing-problem)
   - [Table of contents](#table-of-contents)
+  - [Database](#database)
   - [Data cleaning](#data-cleaning)
     - [Geo-coding addresses](#geo-coding-addresses)
   - [Solving the VRP](#solving-the-vrp)
@@ -11,13 +12,36 @@
 
 ## Table of contents
 
+## Database
+
+For this project we received 4 different datasets. Here is a small overview of the information contained in these files:
+
+- Assets to be delivered: Excel file with every purchase made on the company's website
+- Types of vehicles that can be used:
+  - Name of the model
+  - Gasoline consumption
+  - Maximum load capacity
+- Product catalog:
+  - Product category
+  - Name of the product
+  - Code
+  - Volume
+- Distribution Centers' locations (For this project we have focused solely in Monterrey)
+  - Name of the distribution center
+  - Location, both address and coordinates
+
 ## Data cleaning
 
 [(Back to top)](#table-of-contents)
 
+For the purposes of working with these databases we adopted the common library [pandas](https://pandas.pydata.org/)
+
 ### Geo-coding addresses
 
 [(Back to top)](#table-of-contents)
+
+- Mentioning how the usage of Photon as a geocoder seriously limits the number of addresses that are geocoded successfully.
+- Purchasing a Google Maps comercial API key to improve both the performance and speed of the geocoding process.
 
 ## Solving the VRP
 
