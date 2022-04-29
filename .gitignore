@@ -4,6 +4,3 @@
 # Data
 *.xls
 *.csv
-
-# My API keys
-api-key.txt
