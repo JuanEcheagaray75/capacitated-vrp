@@ -1,5 +1,5 @@
 import pandas as pd
-# import re # Might use it for a different address cleaning structure
+import os
 
 PROCESSED_DATA_PATH = 'data/processed/'
 
@@ -112,6 +112,13 @@ def clean_all_data():
 
 
 if __name__ == '__main__':
-    print('Cleaning data...')
-    clean_all_data()
-    print('Done!')
+
+    # Check if the data is already cleaned
+    if not os.path.exists(PROCESSED_DATA_PATH + 'deliveries-by-address.csv'):
+        print('Cleaning data...')
+        clean_all_data()
+        print('Done!')
+    elif input('Data already cleaned, do you want to clean it again? (y/n) ') == 'y':
+        clean_all_data()
+    
+    print('Cleaning stage done!')

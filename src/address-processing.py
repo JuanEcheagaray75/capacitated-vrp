@@ -59,7 +59,7 @@ if __name__ == '__main__':
         get_coords(sample_size)
         print('Done!')
     
-    elif input('File already exists. Do you want to overwrite it? (y/n) ') == 'y':
+    elif input('Addresses have been geocoded. Do you want to overwrite the file? (y/n) ') == 'y':
         print('Getting coordinates...')
         get_coords(sample_size)
     
@@ -73,4 +73,4 @@ if __name__ == '__main__':
         get_distance_matrix()
         print('Done!')
 
-    print('Done!')
+    print('Address processing finished!')
