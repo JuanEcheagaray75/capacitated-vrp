@@ -26,10 +26,12 @@ def solver() -> (list, int):
 
 
     def print_solution(data, manager, routing, solution):
+
         """Prints solution on console."""
         print(f'Objective: {solution.ObjectiveValue()}')
         total_distance = 0
         total_load = 0
+
         for vehicle_id in range(data['num_vehicles']):
             index = routing.Start(vehicle_id)
             plan_output = 'Route for vehicle {}:\n'.format(vehicle_id)
@@ -45,10 +47,12 @@ def solver() -> (list, int):
                 car_i_route.append(node_index)
                 route_distance += routing.GetArcCostForVehicle(
                     previous_index, index, vehicle_id)
+
             car_i_route.append(0)
             routes_taken.append(car_i_route)
             plan_output += ' {0} Load({1})\n'.format(manager.IndexToNode(index),
                                                     route_load)
+                                                    
             plan_output += 'Distance of the route: {} km\n'.format(route_distance)
             plan_output += 'Load of the route: {}\n'.format(route_load)
             
