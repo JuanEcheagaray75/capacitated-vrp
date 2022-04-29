@@ -1,11 +1,8 @@
-from turtle import distance
 import pandas as pd
 import numpy as np
-import folium
 import os
 from geopy.geocoders import Photon
 from geopy.extra.rate_limiter import RateLimiter
-from math import ceil
 from geopy.distance import geodesic
 from scipy.spatial.distance import cdist
 
@@ -33,7 +30,19 @@ def get_coords(sample_size: float):
 def get_distance_matrix():
 
     deliveries_df = pd.read_csv('data/processed/deliveries-by-address-with-coords.csv')
-    points = np.array(deliveries_df[['latitude', 'longitude']].values)
+    cedis_df = pd.read_csv('data/processed/cedis.csv')
+    cedis_df = cedis_df[cedis_df['CEDIS REG'] == 'MONTERREY']
+    cedis_loc = cedis_df['coord1'][0], cedis_df['coord2'][0]
+    cedis_row = pd.DataFrame({'full_address': 'Cedis Monterrey',
+                            'Vol': np.nan,
+                            'locations': np.nan,
+                            'points': np.nan,
+                            'latitude':	cedis_loc[0],
+                            'longitude': cedis_loc[1],
+                            'altitude': 0}, index=[0])
+    deliveries_df = pd.concat([cedis_row, deliveries_df], ignore_index=True)
+
+    points = deliveries_df[['latitude', 'longitude']].to_numpy()
     
     distance_matrix = cdist(points, points, lambda u, v: geodesic(u, v).km)
     distance_matrix = pd.DataFrame(distance_matrix, index=deliveries_df.index, columns=deliveries_df.index)
