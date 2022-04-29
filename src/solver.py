@@ -141,6 +141,7 @@ def visualize_routes(solution: list) -> None:
 
     # Map generation
     map_ = folium.Map(location=cedis_location, zoom_start=12)
+
     # Add the specific location of cedis to map_
     folium.Marker(location=cedis_location, popup='Cedis Monterrey', icon=folium.Icon(color='red')).add_to(map_)
 
@@ -151,6 +152,7 @@ def visualize_routes(solution: list) -> None:
 
     colors = np.random.choice(possible_colors, len(solution), replace=False)
 
+    # Adding both delivery points and routes. Every route will receive a different color.
     for sol, color, idx in zip(solution, colors, range(len(solution))):
 
         route_df = deliveries_df.iloc[sol][['latitude', 'longitude', 'full_address', 'Vol']]
@@ -162,13 +164,13 @@ def visualize_routes(solution: list) -> None:
                         icon=folium.Icon(color=color, icon='home')).add_to(feature_group), axis=1)
         
         route_df.drop(['full_address', 'Vol'], axis=1, inplace=True)
+
+        # A column swap must be made. Polyline expects data in lat, long format
         cols = ['latitude', 'longitude']
         route_df = route_df[cols]
         points = route_df.to_numpy().tolist()
         folium.PolyLine(points, color=color).add_to(feature_group)
         feature_group.add_to(map_)
-        print(points)
-        print(color)
 
         solution_dfs.append(route_df)
 
