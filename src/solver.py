@@ -144,10 +144,6 @@ def visualize_routes(solution: list) -> None:
     # Add the specific location of cedis to map_
     folium.Marker(location=cedis_location, popup='Cedis Monterrey', icon=folium.Icon(color='red')).add_to(map_)
 
-    possible_colors = ['darkblue', 'black', 'lightgray', 'green', 'pink', 'lightblue', 'cadetblue', 
-                        'orange', 'red', 'purple', 'darkpurple', 'lightgreen', 'darkred', 'white', 
-                        'blue', 'gray', 'darkgreen', 'lightred', 'beige']
-
     solution_dfs = []
     possible_colors = ['darkblue', 'black', 'green', 'pink', 'cadetblue', 
                         'orange', 'red', 'darkpurple', 'lightgreen', 
