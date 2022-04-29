@@ -122,7 +122,7 @@ def solver() -> (list, int):
 
 def visualize_routes(solution: list) -> None:
 
-    np.random.seed(0)
+    np.random.seed(7501)
 
     deliveries_df = pd.read_csv('data/processed/deliveries-by-address-with-coords.csv')
     cedis_locs = pd.read_csv('data/processed/cedis.csv')
@@ -144,10 +144,14 @@ def visualize_routes(solution: list) -> None:
     # Add the specific location of cedis to map_
     folium.Marker(location=cedis_location, popup='Cedis Monterrey', icon=folium.Icon(color='red')).add_to(map_)
 
-    solution_dfs = []
     possible_colors = ['darkblue', 'black', 'lightgray', 'green', 'pink', 'lightblue', 'cadetblue', 
                         'orange', 'red', 'purple', 'darkpurple', 'lightgreen', 'darkred', 'white', 
                         'blue', 'gray', 'darkgreen', 'lightred', 'beige']
+
+    solution_dfs = []
+    possible_colors = ['darkblue', 'black', 'green', 'pink', 'cadetblue', 
+                        'orange', 'red', 'darkpurple', 'lightgreen', 
+                        'darkred', 'blue', 'gray', 'darkgreen']
 
     colors = np.random.choice(possible_colors, len(solution), replace=False)
 
@@ -162,9 +166,13 @@ def visualize_routes(solution: list) -> None:
                         icon=folium.Icon(color=color, icon='home')).add_to(feature_group), axis=1)
         
         route_df.drop(['full_address', 'Vol'], axis=1, inplace=True)
+        cols = ['latitude', 'longitude']
+        route_df = route_df[cols]
         points = route_df.to_numpy().tolist()
         folium.PolyLine(points, color=color).add_to(feature_group)
         feature_group.add_to(map_)
+        print(points)
+        print(color)
 
         solution_dfs.append(route_df)
 
