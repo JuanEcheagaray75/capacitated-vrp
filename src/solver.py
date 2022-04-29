@@ -5,7 +5,9 @@ from ortools.constraint_solver import routing_enums_pb2
 from ortools.constraint_solver import pywrapcp
 
 
-def solver():
+def solver() -> (list, int):
+    
+    routes_taken = []
 
     distance_matrix = pd.read_csv('data/processed/distance_matrix.csv').multiply(100).to_numpy().tolist()
     needs = pd.read_csv('data/processed/deliveries-by-address-with-coords.csv').Vol.multiply(100).tolist()
@@ -22,7 +24,6 @@ def solver():
         data['depot'] = 0
         return data
 
-    routes_taken = []
 
     def print_solution(data, manager, routing, solution):
         """Prints solution on console."""
@@ -55,8 +56,11 @@ def solver():
             total_distance += route_distance
             total_load += route_load
 
+        distance_traveled = total_distance
         print('Total distance of all routes: {} km'.format(total_distance))
         print('Total load of all routes: {}'.format(total_load))
+        return distance_traveled
+        
 
     """Solve the CVRP problem."""
     # Instantiate the data problem.
@@ -110,13 +114,13 @@ def solver():
 
     # Print solution on console.
     if solution:
-        print_solution(data, manager, routing, solution)
-        return routes_taken
+        distance_traveled = print_solution(data, manager, routing, solution)
+        return routes_taken, distance_traveled
     else:
         print('No solution found.')
 
 
-def visualize_routes(solution):
+def visualize_routes(solution: list) -> None:
 
     np.random.seed(0)
 
@@ -167,13 +171,3 @@ def visualize_routes(solution):
     folium.LayerControl().add_to(map_)
 
     map_.save('routes.html')
-
-
-def main():
-    solution = solver()
-    visualize_routes(solution)
-
-
-if __name__ == '__main__':
-    main()
-    print('Solution found')
