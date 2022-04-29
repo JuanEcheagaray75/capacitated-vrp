@@ -1,7 +1,6 @@
 # Coppel Vehicle Routing Problem
 
 - [Coppel Vehicle Routing Problem](#coppel-vehicle-routing-problem)
-  - [Table of contents](#table-of-contents)
   - [Database](#database)
   - [Data cleaning](#data-cleaning)
     - [Geo-coding addresses](#geo-coding-addresses)
@@ -9,8 +8,6 @@
   - [Results](#results)
   - [Installation](#installation)
   - [License](#license)
-
-## Table of contents
 
 ## Database
 
