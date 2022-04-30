@@ -21,6 +21,6 @@ def test(n):
 
 
 if __name__ == '__main__':
-    best_route, distance = test(2)
-    print('Minimal distance:', distance)
+    best_route, distance = test(10)
+    print('Minimal distance:', distance / 100)
     visualize_routes(best_route)
