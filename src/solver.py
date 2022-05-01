@@ -51,18 +51,18 @@ def solver() -> (list, int):
             car_i_route.append(0)
             routes_taken.append(car_i_route)
             plan_output += ' {0} Load({1})\n'.format(manager.IndexToNode(index),
-                                                    route_load)
+                                                    route_load / 100)
                                                     
-            plan_output += 'Distance of the route: {} km\n'.format(route_distance)
-            plan_output += 'Load of the route: {}\n'.format(route_load)
+            plan_output += 'Distance of the route: {} km\n'.format(route_distance / 100)
+            plan_output += 'Load of the route: {}\n'.format(route_load / 100)
             
             print(plan_output)
             total_distance += route_distance
             total_load += route_load
 
         distance_traveled = total_distance
-        print('Total distance of all routes: {} km'.format(total_distance))
-        print('Total load of all routes: {}'.format(total_load))
+        print('Total distance of all routes: {} km'.format(total_distance / 100))
+        print('Total load of all routes: {}'.format(total_load / 100))
         return distance_traveled
         
 

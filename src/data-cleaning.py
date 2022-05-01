@@ -12,8 +12,7 @@ def clean_cedis(cedis_db_path: str):
     cedis_df['DOMICILIO'] = cedis_df['DOMICILIO'].str.strip()
     cedis_df['COLONIA'] = cedis_df['COLONIA'].str.strip()
     cedis_df['CIUDAD'] = cedis_df['CIUDAD'].str.strip()
-    cedis_df[['coord1', 'coord2']] = cedis_df['Coordenadas'].str.split(
-        ',', expand=True)
+    cedis_df[['coord1', 'coord2']] = cedis_df['Coordenadas'].str.split(',', expand=True)
 
     # Save to csv
     cedis_df.to_csv(PROCESSED_DATA_PATH + 'cedis.csv', index=False)
