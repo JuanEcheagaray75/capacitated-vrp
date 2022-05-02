@@ -1,3 +1,5 @@
+<img src='CVRP.png' width='800'>
+
 # Capacitated Vehicle Routing Problem
 
 - [Capacitated Vehicle Routing Problem](#capacitated-vehicle-routing-problem)
