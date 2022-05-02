@@ -53,6 +53,17 @@ Some serious caveats of this approach is the lack of reliability for the geocodi
 
 [(Back to top)](#table-of-contents)
 
+Solving a VRP instance requires that we first determine it's nature:
+
+- Do we have volume constraints?
+- Is there a limit to how much time the vehicule can spend on the route?
+- What about the distance it travels, is there a limit to it?
+- A mix of all the examples above.
+
+For this repo we have focused on finding optimal solutions for the capacitated vehicle routing problem. You can find the formal mathematical model we have proposed for solving the problem in the folder `reports`.
+
+Now, to actually solve the CVRP, we followed the guide provided by Google [here](https://developers.google.com/optimization/routing/cvrp). We first calculated the distance matrix using the `cdist` function of `scipy.spatial.distance`, for a more realistic measure we used the geodesic distance.
+
 ## Results
 
 [(Back to top)](#table-of-contents)
