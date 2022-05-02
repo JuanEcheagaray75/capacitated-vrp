@@ -1,7 +1,7 @@
-# Coppel Vehicle Routing Problem
+# Capacitated Vehicle Routing Problem
 
-- [Coppel Vehicle Routing Problem](#coppel-vehicle-routing-problem)
-  - [Database](#database)
+- [Capacitated Vehicle Routing Problem](#capacitated-vehicle-routing-problem)
+  - [Databases](#databases)
   - [Data cleaning](#data-cleaning)
     - [Geo-coding addresses](#geo-coding-addresses)
   - [Solving the VRP](#solving-the-vrp)
@@ -9,7 +9,7 @@
   - [Installation and usage](#installation-and-usage)
   - [License](#license)
 
-## Database
+## Databases
 
 For this project we received 4 different datasets. Here is a small overview of the information contained in these files:
 
@@ -31,14 +31,23 @@ For this project we received 4 different datasets. Here is a small overview of t
 
 [(Back to top)](#table-of-contents)
 
-For the purposes of working with these databases we adopted the common library [pandas](https://pandas.pydata.org/)
+For the purposes of working with these databases we adopted the common library [pandas](https://pandas.pydata.org/). Some data cleaning and text processing was performed across the datasets, such as:
+
+- Keep only the latest deliveries (we only need the latest purchases)
+- Removal of missing values
+- Renaming city names to math the real names of the cities
+- Generation of a full address from the reference data included
+- Determined how much volume must be sent to a particular client through pandas merge method.
 
 ### Geo-coding addresses
 
 [(Back to top)](#table-of-contents)
 
-- Mentioning how the usage of Photon as a geocoder seriously limits the number of addresses that are geocoded successfully.
-- Purchasing a Google Maps comercial API key to improve both the performance and speed of the geocoding process.
+After completing the cleaning stage, we have a single dataset containg all the addresses and products to be delivered to the clients. We then need a way to measure the distance between each client for the purposes of calculating the distance matrix needed to solve a CVRP. We used the geocoder `Photon` through the API made by `geopy` to obtain a list of coordinates for each address. After the geocoding process of a single address, a new column containing latitude, longitude and altitude is generated.
+
+Some serious caveats of this approach is the lack of reliability for the geocoding process, after several attempts and different proposal for addresses, we were only able to geocode at most 26% of the addresses that remained from the last stage.
+
+> It might be the case that a commercial license has a lowe rate of failure, Google's API is the most logical option given we use it's API for the next stage.
 
 ## Solving the VRP
 
@@ -62,6 +71,8 @@ This repo was designed and tested with Python 3.8 running on Ubuntu based on WSL
     - `source .venv/bin/activate`
 4. Install the dependencies:
     - `pip install -r requirements.txt`
+5. Run bash script:
+    - `source run.sh`
 
 ## License
 
