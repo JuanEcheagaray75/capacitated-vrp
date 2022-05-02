@@ -9,6 +9,7 @@
   - [Solving the VRP](#solving-the-vrp)
   - [Results](#results)
   - [Installation and usage](#installation-and-usage)
+  - [Credits](#credits)
   - [License](#license)
 
 ## Databases
@@ -92,6 +93,14 @@ This repo was designed and tested with Python 3.8 running on Ubuntu based on WSL
     - `pip install -r requirements.txt`
 5. Run bash script:
     - `source run.sh`
+
+## Credits
+
+We would like to thank:
+
+- Professor Fernando Elizalde Ramírez: for his advice on the overall implementation and modeling of the CVRP
+- Professor Jaime Eduardo Martínez Sánchez: for his advice on the interpretation and validation of the optimal routes found
+- Google's ortools library: for the implementation of the CVRP solver and the great documentation
 
 ## License
 
