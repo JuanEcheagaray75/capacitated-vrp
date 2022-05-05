@@ -1,0 +1,212 @@
+\documentclass[journal]{IEEEtran}                                                          % if you need a4paper
+%\documentclass[a4paper, 10pt, conference]{ieeeconf}      % Use this line for a4
+                                                         % paper
+\IEEEoverridecommandlockouts        % This command is only
+% needed if you want to
+                                    % use the \thanks command<<
+%\overrideIEEEmargins
+% See the \addtolength command later in the file to balance the column lengths
+% on the last page of the document
+% The following packages can be found on http:\\www.ctan.org
+\usepackage{graphics} % for pdf, bitmapped graphics files
+\usepackage{rotating} % rotate figures
+\usepackage{epsfig} % for postscript graphics files
+%\usepackage{mathptmx} % assumes new font selection scheme installed
+%\usepackage{times} % assumes new font selection scheme installed
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[spanish]{babel}
+\usepackage{cite}
+\usepackage{hyperref}
+
+\usepackage{atbegshi} % erase first blank page
+\AtBeginDocument{\AtBeginShipoutNext{\AtBeginShipoutDiscard}}
+
+\title{\LARGE \bf Reto: Entregable 2}
+
+%%%%%%%%%%%%%%%%%%%%%% AUTHORS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\author{Verónica Victoria García De la Fuente, Emily Rebeca Méndez Cruz, \\Carolina Longoria Lozano, Juan Pablo Echeagaray González \\
+Optimización determinista \\
+MA2001B.200 \\
+Dr. Fernando Elizalde Ramírez \\
+Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops 
+\begin{document}
+
+    \thanks{Verónica Victoria García De la Fuente, Emily Rebeca Méndez Cruz, Carolina Longoria Lozano, Juan Pablo Echeagaray González pertencen al Tec de Monterrey Campus Monterrey, N.L. C.P. 64849, Mexico {\tt\small}}
+
+    \maketitle
+
+    \thispagestyle{empty}
+    \pagestyle{empty}
+
+    \begin{abstract}
+        La empresa Coppel ha solicitado que alumnos del Tecnológico de Monterrey diseñen un programa de rutas para la entrega de los productos adquiridos por sus clientes en su tienda \emph{online}. Con las bases de datos recibidas se formuló un modelo de CVRP, este modelo fue embebido y optimizado para minimizar las distancias recorridas por los camiones de entrega. El producto final despliega un reporte de las rutas así como una visualización de estas.
+    \end{abstract}
+
+    \begin{IEEEkeywords} 
+    CVRP, Programación Entera, Coppel, Rutas
+    \end{IEEEkeywords}
+
+    \section{INTRODUCCIÓN} 
+        
+        \subsection{Introducción sobre Coppel}
+        
+            Coppel es una empresa multiproducto que lleva años volviéndose la empresa que es el día de hoy. Fundada en 1941, Coppel empezó como una tienda de radios y relojes, y tras la Segunda Guerra Mundial tuvieron la idea de comenzar a vender a crédito. 80 años después, Coppel es una empresa reconocida nacional e internacionalmente, con un enfoque comercial. Crecieron, no sólo su propia marca y nombre, sino también la cantidad de marcas que se pueden encontrar en las tiendas \cite{Coppel}. De acuerdo a Linkedin, Coppel tiene 14,682 colaboradores y 1,228 sucursales, en más de 450 ciudades del país. Una gran parte de su funcionamiento se da por medio de e-commerce, dando la opción a sus clientes de volverse “Clientes Digitales” \cite{linkedin_2022}.
+    
+        \subsection{Introducción al E-Commerce}
+        
+            El comercio electrónico, e-commerce, consiste en realizar transacciones por medios digitales, e incluye distribución, venta, compra, marketing y suministro de información de productos o servicios \cite{visand}. Al buscar las empresas más exitosas, hay muy pocas que no integran el e-commerce como parte integral de su modelo. Le da a las empresas la posibilidad de crear una economía de plataforma \cite{dekker-supremacy} en la que pueden mantener un número relativamente bajo de empleados, cosa que es conveniente para las empresas. Es un mercado que no muestra indicaciones de frenar su crecimiento. De acuerdo a los datos de Stephanie Chevalier en Statista, del 2014 al 2021, las ventas de e-commerce han subido de 1,336 a 4,938 billones de dólares. Uno de los culpables de este crecimiento es lo cómodo que es para el cliente dar un click y recibir lo que quiere en la puerta de su casa. Por medio del e-comercio, el cliente puede observar todos los productos disponibles, ordenar lo que quiera desde la comodidad de su hogar, y simplemente esperar el tiempo de llegada. Para que esto se lleve a cabo de la mejor manera, se debe diseñar una política de reparto eficiente.
+    
+        \subsection{Trabajo relacionado}
+        
+            El \emph{Travelling Salesman Problem}, conocido como \emph{Problema del Agente Viajero} en español, es un problema que se encarga de buscar la ruta más corta y eficiente para llegar a un destino. Esta se basa en que existen múltiples opciones de llegar a un mismo destino, pero enfocándose en reducir costos de transporte, por lo que obtenemos de solución la ruta más corta \cite{trevelingProb}.
+    
+            Para ésta problemática se tiene contemplado que entre más destinos haya automáticamente el nivel de complejidad para el cálculo de la solución óptima aumenta. Por esta razón TSP es clasificado como un problema de NP-Hard, de acuerdo con la teoría de la complejidad computacional \cite{trevelingProb}.
+    
+            Para la solución de este problema existen diferentes métodos debido a la popularidad y complejidad que tiene, estos son algunos de ellos:
+            
+            \subsubsection{Vecino más cercano}
+            
+                También conocido como KNN, este es uno de los algoritmos más simples para resolver este problema. Se trata de un método de aprendizaje automático básico aplicado para la logística de transporte, en este caso, el conductor -o agente viajero- siempre comienza su recorrido con el destino más cercano. Aunque para este método la solución encontrada no siempre logra la optimización \cite{trevelingProb}.
+    
+            \subsubsection{Ramificación y atadura}
+            
+                El método Branch and Bound es un algoritmo complejo diseñado para solucionar problemas que cuentan con variables de decisión enteras; para este método, el problema se divide en múltiples sub-problemas donde cada uno de estos tiene varias soluciones posibles. Se debe destacar que al seleccionar una solución, esta puede afectar en las posibles soluciones de sub-problemas posteriores, ya que como su nombre lo indica, actúa de manera ramificada. Este método se aplica como solución del problema del vendedor viajero \cite{trevelingProb}.
+    
+            \subsubsection{Fuerza bruta}
+            
+                Consiste en la enumeración sistemática de todas las posibles rutas de distribución, se calcula y compara todas las posibles soluciones revisando cuál o cuáles de ellas cumplen mejor a los objetivos de la empresa. Esto con el fin de establecer una única solución, que para el caso de este problema, sería la más corta y por ende la óptima \cite{trevelingProb}.
+        
+    \section{Definición del problema} \label{definition}
+        
+        Sean los conjuntos:
+        \begin{gather*}
+            i \in \{1, \dots, n \} \\
+            j \in \{1, \dots, n \} \\
+            k \in \{1, \dots, V \}
+        \end{gather*}
+        
+        Sean los parámetros:
+        \begin{gather*}
+            V: \text{Número de vehículos disponibles} \\
+            Q: \text{Capacidad de carga máxima del vehículo en } m^3 \\
+            n: \text{Número de clientes a visitar} \\
+            c_{ij}: \text{Distancia geodésica entre el punto } i \text{ y el punto } j \\
+            d_j: \text{Demanda en } m^3 \text{ del cliente } j 
+        \end{gather*}
+        
+        Sean las variables:
+        \begin{gather*}
+            x_{ijk}: \text{Variable binaria que toma el valor de 1}\\
+            \text{si el arco del punto i al punto j} \\
+            \text{forma parte de la ruta óptima recorrida por el vehículo } k \\
+            x_{ijk} \in \{0, 1\}
+        \end{gather*}
+        
+        Modelamos el problema de optimización como:
+        
+        \begin{equation*}
+        	\begin{aligned}
+        		\text{min } \quad & z = \sum_{k=1}^{V} \sum_{j=1}^{n} \sum_{i=1}^{n} c_{ij} x_{ijk}\\
+        		\text{sujeto a: }\quad &
+        		\begin{array}{c}
+        			\displaystyle\sum_{i=1}^{n} x_{ijk} = \sum_{i=1}^{n} x_{jik} \\[3pt]
+                    \displaystyle\sum_{k=1}^{V} \sum_{i=1}^{n} x_{ijk} = 1 \\[3pt]
+                    \displaystyle\sum_{j=2}^{n} x_{1jk} = 1 \\[3pt]
+                    \displaystyle\sum_{i=1}^{n} \sum_{j=2}^{n} d_{j} x_{ijk} \leq Q \\[3pt]
+                    u_{j} - u_{i} \geq d_j - Q (1 - x_{ijk}) \\[3pt]
+                    d_i \leq u_i \leq Q \\[3pt]
+                    x_{ijk} \in \{0, 1\}
+        		\end{array}
+        	\end{aligned}
+        \end{equation*}
+        
+        Las restricciones anteriores hacen referencia a:
+        \begin{enumerate}
+            \item Número de veces que un camión entra por un punto debe de ser igual que el número de veces que las que sale
+            \item Cada camión solamente puede entrar 1 vez a un punto
+            \item Todos los vehículos salen del CEDIS
+            \item Límite a la capacidad de carga máxima del vehículo
+            \item Las últimas 2 restricciones eliminan los \emph{subtours}
+        \end{enumerate}
+        
+        Para la problemática actual, estamos planeando realizar 192 entregas ($n$), se dispondrán de 9 vehículos $(V)$, cada uno de ellos tendrá una capacidad máxima de carga de 18 $m^3$ ($Q$). Los valores numéricos para las demandas y distancias son calculados dentro de la aplicación.
+        
+        El heurístico que usamos en nuestro modelo es el costo asociado de ir de un punto de la ciudad a otro. No estamos modelando la distancia que hay entre cada punto como la distancia manejando, sino que estamos usando la distancia geodésica que hay entre cada punto, una gran desventaja del uso de este heurístico es que puede generar rutas aparentemente óptimas pero que no son factibles cuando se agregan las posibles maneras de conectar los puntos de entrega. Hemos decidido seguir adelante con este heurístico ya que hay varios proyectos reconocidos que usan este heurístico para resolver problemas de ruteo de vehículos \cite{ERDOGAN201762}.
+    
+    \section{Puntos de entrega}
+        
+        Haciendo uso de Python y de la librería \emph{Folium} hemos visualizado una muestra de los últimos pedidos registrados en la base de datos, Fig \ref{puntos-entrega-mapa}; cada punto azul representa un cliente, y el punto negro dentro del mapa es donde se encuentra el CEDIS.
+        
+        \begin{figure}[!ht]
+            \centering
+            \includegraphics[scale=0.3]{Figures/deliveries_plot.pdf}
+            \caption{Puntos de entrega} 
+            \label{puntos-entrega-mapa}
+        \end{figure}
+        
+        Gracias a la nueva base de datos proporcionada por Coppel, hemos logrado incrementar la precisión del proceso de geo-codificación de los domicilios.
+        
+        %Después de inspeccionar el mapa generado hemos notado que hay algunos puntos que parecen tener datos geográficos erróneos, descartar la entrega a estos clientes es algo inaceptable, así que una de las siguientes tareas en el proyecto será desarrollar un método de limpieza efectivo que ayude a mejorar la información geográfica que obtengamos de cada punto.
+    
+    \section{Metodología}
+    
+        Para la solución de esta problemática hemos usado el lenguaje de programación Python; para los procesos de lectura, limpieza, exploración y agregación de datos hemos usado la librería \emph{pandas} en conjunto con \emph{matplotlib} y \emph{seaborn}, para la solución del problema de programación lineal usamos la librería \emph{ortools} de Google, y para la visualización de los rutas generadas hemos usado \emph{folium}. Una liga al código fuente que hemos desarrollado se encuentra en el apéndice \ref{code}.
+        
+        El dispositivo que usamos para desarrollar y correr la aplicación disponía de un CPU Intel i5 con 8 GB de memoria RAM, como sistema operativo se ha usado Ubuntu 20.04 LTS.
+    
+        \subsection{Limpieza de la base de datos} \label{stage 1}
+            
+            Hemos recibido 4 bases de datos. Una conteniendo las direcciones de los centros de distribución de Coppel en México, un archivo que contiene un listado de todos los productos que vende la empresa más algunas de sus propiedades, en particular nos interesa el volumen de cada artículo. Disponemos también de un archivo que contiene todos los tipos de vehículos que Coppel usa para realizar las entregas, y una base de datos que contiene un listado de las entregas que Coppel debe de realizar.
+            
+        \subsection{Procesamiento de domicilios} \label{stage 2}
+        
+            Para la geocodificación de los domicilios hemos usado la librería \emph{Photon}, desde el paso anterior hemos creado una columna que contiene todos los datos de referencias de los domicilios de los compradores. El proceso de geocodificación toma un tiempo promedio de 15 minutos en la máquina que usamos, en promedio se logran codificar 25\% de los domicilios que recibe. Al final de este proceso tenemos las coordenadas asociadas a cada uno de los domicilios
+
+        \subsection{Cálculo de matriz de distancias} \label{stage 3}
+            
+            De las coordenadas de cada domicilio calculamos una matriz de distancia todos contra todos, la distancia a usar es la geodésica.
+
+        \subsection{Generación de rutas} \label{stage 4}
+        
+            Para la solución del problema hemos usado la librería \emph{ortools} de Google. Hacemos uso de la matriz de distancias calculada en el paso anterior, un listado de cuánto volumen debe de ser entregado a cada uno de los clientes, un número de vehículos a mandar, y su capacidad máxima de carga en metros cúbicos. La solución generada consiste de un listado de las rutas a seguir por cada uno de los vehículos, el volumen total que llevarán, cuál fue la distancia total recorrida por todos los vehículos y cuánta carga llevaron.
+
+        \subsection{Visualización de rutas} 
+            
+            La visualización de rutas se realizó con la API de la librería \emph{folium}, con ella hemos generado un mapa de Monterrey en la que se visualizan las rutas que siguen todos los vehículos; el mapa también despliega información del domicilio al que se realiza la entrega, y el volumen total de los productos que debe de recibir.
+
+    \section{Resultados preliminares}
+    
+        Después de correr la aplicación, se desplegará el navegador el conjunto de rutas de todos los vehículos, en la figura \ref{generated-routes} podemos ver 2 de las rutas encontradas.
+    
+        \begin{figure}[!ht]
+            \centering
+            \includegraphics[scale=0.3]{Figures/rutas-generadas.png}
+            \caption{Ejemplo de rutas generadas} 
+            \label{generated-routes}
+        \end{figure}
+        
+        Para esta simulación, la aplicación encontró un conjunto de rutas que minimizan la distancia que recorren los camiones en total hasta 480.2 km. En las mejores corridas la ruta más corta que realiza un camión es de 37.4 km, y la más larga de 100.14 km.
+        
+    \section{Discusión} \label{discusion}
+        
+        A pesar de que el producto que hemos desarrollado ya es funcional, hemos encontrado algunas áreas de oportunidad que de ser resueltas incrementarían aún más el valor de la aplicación:
+        
+        \subsection{Geo-codificación de los domicilios}
+            
+            Actualmente la aplicación hace uso de una librería de libre uso llamada \emph{Photon} para geo-codificar los domicilios disponibles en la base de datos; consideramos que la adquisición de una licencia comercial podría aumentar aún más el número de domicilios que son geo-codificados con éxito.
+            
+        \subsection{Cálculo de distancia entre 2 puntos}
+            
+            La aplicación utiliza como métrica de distancia la distancia geodésica, que está relativamente lejos de ser una aproximación rigurosa para determinar la distancia entre 2 puntos. Sugerimos también que se adquiera una licencia comercial que calcule esta distancia. Su uso le daría una mayor validez a los resultados que encontramos.
+            
+    \appendices
+    
+    \section{Código fuente}\label{code}
+    
+        El código generado puede ser consultado \href{https://github.com/JuanEcheagaray75/Coppel-vrp-tsp}{aquí}
+    
+    \bibliographystyle{IEEEtran}
+    \bibliography{references.bib}
+
+\end{document}
