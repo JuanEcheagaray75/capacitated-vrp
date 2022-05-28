@@ -10,13 +10,13 @@
 \usepackage{hyperref}
 
 \usepackage{float}
+\usepackage{csvsimple}
 
 \usepackage{atbegshi} % erase first blank page
 \AtBeginDocument{\AtBeginShipoutNext{\AtBeginShipoutDiscard}}
 
 \title{\LARGE \bf Ruteo de entrega de productos para una empresa de e-commerce}
 
-%%%%%%%%%%%%%%%%%%%%%% AUTHORS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
 \author{Verónica Victoria García De la Fuente, Emily Rebeca Méndez Cruz, \\Carolina Longoria Lozano, Juan Pablo Echeagaray González \\
 Optimización determinista \\
 MA2001B.200 \\
@@ -36,7 +36,7 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
     \end{abstract}
 
     \begin{IEEEkeywords} 
-    CVRP, Programación Entera, Coppel, Rutas
+        CVRP, Programación Entera, Coppel, Rutas
     \end{IEEEkeywords}
 
     \section{INTRODUCCIÓN} 
@@ -44,7 +44,9 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
         \subsection{Introducción sobre Coppel}
         
             Coppel es una empresa multiproducto que lleva años volviéndose la empresa que es el día de hoy. Fundada en 1941, Coppel empezó como una tienda de radios y relojes, y tras la Segunda Guerra Mundial tuvieron la idea de comenzar a vender a crédito. 80 años después, Coppel es una empresa reconocida nacional e internacionalmente, con un enfoque comercial. Crecieron, no sólo su propia marca y nombre, sino también la cantidad de marcas que se pueden encontrar en las tiendas \cite{Coppel}. De acuerdo a Linkedin, Coppel tiene 14,682 colaboradores y 1,228 sucursales, en más de 450 ciudades del país. Una gran parte de su funcionamiento se da por medio de e-commerce, dando la opción a sus clientes de volverse “Clientes Digitales” \cite{linkedin_2022}.
-    
+
+           
+
         \subsection{Introducción al E-Commerce}
         
             El comercio electrónico, e-commerce, consiste en realizar transacciones por medios digitales, e incluye distribución, venta, compra, marketing y suministro de información de productos o servicios \cite{visand}. Al buscar las empresas más exitosas, hay muy pocas que no integran el e-commerce como parte integral de su modelo. Le da a las empresas la posibilidad de crear una economía de plataforma \cite{dekker-supremacy} en la que pueden mantener un número relativamente bajo de empleados, cosa que es conveniente para las empresas. Es un mercado que no muestra indicaciones de frenar su crecimiento. De acuerdo a los datos de Stephanie Chevalier en Statista, del 2014 al 2021, las ventas de e-commerce han subido de 1,336 a 4,938 billones de dólares. Uno de los culpables de este crecimiento es lo cómodo que es para el cliente dar un click y recibir lo que quiere en la puerta de su casa. Por medio del e-comercio, el cliente puede observar todos los productos disponibles, ordenar lo que quiera desde la comodidad de su hogar, y simplemente esperar el tiempo de llegada. Para que esto se lleve a cabo de la mejor manera, se debe diseñar una política de reparto eficiente.
@@ -180,25 +182,15 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
         
         Como se puede apreciar en la tabla \ref{rutas}, para esta simulación, la aplicación encontró un conjunto de rutas que minimizan la distancia que recorren los camiones en total hasta 483.49 km. En las mejores corridas la ruta más corta que realiza un camión es de 32 km, y la más larga de 97.02 km.
         
-        \begin{table}[H]
-            \begin{center}
-            \scalebox{0.65}{
-                \begin{tabular}{|c|c|c|c|c|}
-                    \hline
-                    Número de ruta & Clientes a visitar & Distancia recorrida (km) & Consumo gasolina (l) & Volumen libre (m\textasciicircum{}3) \\ \hline
-                    1           & 30                 & 97.02                    & 10.19                & 5.72                                 \\
-                    2           & 16                 & 57.26                    & 6.01                 & 3.09                                 \\
-                    3           & 4                  & 32.00                    & 3.36                 & 0.13                                 \\
-                    4           & 19                 & 92.00                    & 9.66                 & 4.07                                 \\
-                    5           & 28                 & 44.40                    & 4.66                 & 0                                    \\
-                    6           & 23                 & 37.49                    & 3.94                 & 0                                    \\
-                    7           & 26                 & 40.04                    & 4.20                 & 0                                    \\
-                    8           & 29                 & 42.88                    & 4.50                 & 1.10                                 \\
-                    9           & 26                 & 40.40                    & 4.24                 & 3.44                                 \\ \hline
-                \end{tabular}}
-            \end{center}
-        \caption{Rutas generadas por el programa}
-        \label{rutas}
+        \begin{table}[h!]
+            \centering
+            \csvreader[tabular = ||c|c|c|c|c||,
+                        table head = \hline N & Distancia $(km)$ & Carga $(m^{3})$ & Vol. muerto $(m^{3})$ & Gas $(l)$ \\ \hline,
+                        late after last line = \\ \hline,
+                        ]{../data/processed/best_route.csv}{}%
+                        {\csvcoli & \csvcolii & \csvcoliii & \csvcoliv & \csvcolv}
+            \caption{Rutas generadas por el programa}
+            \label{rutas}
         \end{table}
         
     \section{Discusión} \label{discusion}
