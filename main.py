@@ -1,6 +1,7 @@
 from src.solver import solver, visualize_routes
 import numpy as np
 import pandas as pd
+from progress.bar import Bar
 
 
 def test(n: int):
@@ -25,13 +26,14 @@ def test(n: int):
     distances_per_vehicle = []
     loads_per_vehicle = []
 
-    for i in range(n):
-        print('-----------------')
-        route, distance, total_load, distance_per_vehicle, load_per_vehicle = solver()
-        distances.append(distance)
-        routes.append(route)
-        distances_per_vehicle.append(distance_per_vehicle)
-        loads_per_vehicle.append(load_per_vehicle)
+    with Bar('Processing...', max=n, suffix='%(percent).1f%% - %(eta)ds') as bar:
+        for i in range(n):
+            route, distance, total_load, distance_per_vehicle, load_per_vehicle = solver()
+            distances.append(distance)
+            routes.append(route)
+            distances_per_vehicle.append(distance_per_vehicle)
+            loads_per_vehicle.append(load_per_vehicle)
+            bar.next()
 
     # Return best route
     distances = np.array(distances)
