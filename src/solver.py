@@ -8,6 +8,8 @@ from ortools.constraint_solver import pywrapcp
 def solver() -> (list, int):
     
     routes_taken = []
+    load_per_vehicle = []
+    distance_per_vehicle = []
 
     distance_matrix = pd.read_csv('data/processed/distance_matrix.csv').multiply(100).to_numpy().tolist()
     needs = pd.read_csv('data/processed/deliveries-by-address-with-coords.csv').Vol.multiply(100).tolist()
@@ -31,8 +33,10 @@ def solver() -> (list, int):
         print(f'Objective: {solution.ObjectiveValue()}')
         total_distance = 0
         total_load = 0
+        route_volume = []
 
         for vehicle_id in range(data['num_vehicles']):
+            temp_vehicle_distance = []
             index = routing.Start(vehicle_id)
             plan_output = 'Route for vehicle {}:\n'.format(vehicle_id)
             route_distance = 0
@@ -54,16 +58,21 @@ def solver() -> (list, int):
                                                     route_load / 100)
                                                     
             plan_output += 'Distance of the route: {} km\n'.format(route_distance / 100)
+            distance_per_vehicle.append(route_distance / 100)
+            load_per_vehicle.append(route_load / 100)
             plan_output += 'Load of the route: {}\n'.format(route_load / 100)
             
             print(plan_output)
             total_distance += route_distance
             total_load += route_load
+            route_volume.append(route_load / 100)
 
         distance_traveled = total_distance
         print('Total distance of all routes: {} km'.format(total_distance / 100))
         print('Total load of all routes: {}'.format(total_load / 100))
-        return distance_traveled
+        # print(f'Distance per vehicle : {distance_per_vehicle}')
+        # print(f'Load per vehicle : {load_per_vehicle}')
+        return distance_traveled, total_load, route_volume, distance_per_vehicle, load_per_vehicle
         
 
     """Solve the CVRP problem."""
@@ -118,8 +127,8 @@ def solver() -> (list, int):
 
     # Print solution on console.
     if solution:
-        distance_traveled = print_solution(data, manager, routing, solution)
-        return routes_taken, distance_traveled
+        distance_traveled, vehicle_load, route_volume, distance_per_vehicle, load_per_vehicle = print_solution(data, manager, routing, solution)
+        return routes_taken, distance_traveled, vehicle_load, distance_per_vehicle, load_per_vehicle
     else:
         print('No solution found.')
 
