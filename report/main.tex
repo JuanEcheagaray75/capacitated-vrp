@@ -1,28 +1,20 @@
-\documentclass[journal]{IEEEtran}                                                          % if you need a4paper
-%\documentclass[a4paper, 10pt, conference]{ieeeconf}      % Use this line for a4
-                                                         % paper
-\IEEEoverridecommandlockouts        % This command is only
-% needed if you want to
-                                    % use the \thanks command<<
-%\overrideIEEEmargins
-% See the \addtolength command later in the file to balance the column lengths
-% on the last page of the document
-% The following packages can be found on http:\\www.ctan.org
-\usepackage{graphics} % for pdf, bitmapped graphics files
-\usepackage{rotating} % rotate figures
-\usepackage{epsfig} % for postscript graphics files
-%\usepackage{mathptmx} % assumes new font selection scheme installed
-%\usepackage{times} % assumes new font selection scheme installed
+\documentclass[journal]{IEEEtran}
+\IEEEoverridecommandlockouts
+\usepackage{graphics}
+\usepackage{rotating}
+\usepackage{epsfig}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage[spanish]{babel}
 \usepackage{cite}
 \usepackage{hyperref}
 
+\usepackage{float}
+
 \usepackage{atbegshi} % erase first blank page
 \AtBeginDocument{\AtBeginShipoutNext{\AtBeginShipoutDiscard}}
 
-\title{\LARGE \bf Reto: Entregable 2}
+\title{\LARGE \bf Ruteo de entrega de productos para una empresa de e-commerce}
 
 %%%%%%%%%%%%%%%%%%%%%% AUTHORS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
 \author{Verónica Victoria García De la Fuente, Emily Rebeca Méndez Cruz, \\Carolina Longoria Lozano, Juan Pablo Echeagaray González \\
@@ -40,7 +32,7 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
     \pagestyle{empty}
 
     \begin{abstract}
-        La empresa Coppel ha solicitado que alumnos del Tecnológico de Monterrey diseñen un programa de rutas para la entrega de los productos adquiridos por sus clientes en su tienda \emph{online}. Con las bases de datos recibidas se formuló un modelo de CVRP, este modelo fue embebido y optimizado para minimizar las distancias recorridas por los camiones de entrega. El producto final despliega un reporte de las rutas así como una visualización de estas.
+        Una empresa de e-commerce ha solicitado que alumnos del Tecnológico de Monterrey diseñen un programa de rutas para la entrega de los productos adquiridos por sus clientes en su tienda \emph{online}. Con las bases de datos recibidas se formuló un modelo de CVRP, este modelo fue embebido y optimizado para minimizar las distancias recorridas por los camiones de entrega. El producto final despliega un reporte de las rutas así como una visualización de estas.
     \end{abstract}
 
     \begin{IEEEkeywords} 
@@ -80,28 +72,28 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
     \section{Definición del problema} \label{definition}
         
         Sean los conjuntos:
-        \begin{gather*}
-            i \in \{1, \dots, n \} \\
-            j \in \{1, \dots, n \} \\
-            k \in \{1, \dots, V \}
-        \end{gather*}
+        \begin{align*}
+            & i \in \{1, \dots, n \} \\
+            & j \in \{1, \dots, n \} \\
+            & k \in \{1, \dots, V \}
+        \end{align*}
         
         Sean los parámetros:
-        \begin{gather*}
-            V: \text{Número de vehículos disponibles} \\
-            Q: \text{Capacidad de carga máxima del vehículo en } m^3 \\
-            n: \text{Número de clientes a visitar} \\
-            c_{ij}: \text{Distancia geodésica entre el punto } i \text{ y el punto } j \\
-            d_j: \text{Demanda en } m^3 \text{ del cliente } j 
-        \end{gather*}
+        \begin{align*}
+            & V: \text{Número de vehículos disponibles} \\
+            & Q: \text{Capacidad de carga máxima del vehículo en } m^3 \\
+            & n: \text{Número de clientes a visitar} \\
+            & c_{ij}: \text{Distancia geodésica entre el punto } i \text{ y el punto } j \\
+            & d_j: \text{Demanda en } m^3 \text{ del cliente } j 
+        \end{align*}
         
         Sean las variables:
-        \begin{gather*}
-            x_{ijk}: \text{Variable binaria que toma el valor de 1}\\
-            \text{si el arco del punto i al punto j} \\
-            \text{forma parte de la ruta óptima recorrida por el vehículo } k \\
-            x_{ijk} \in \{0, 1\}
-        \end{gather*}
+        \begin{align*}
+            & x_{ijk}: \text{Variable binaria que toma el valor de 1}\\
+            & \text{si el arco del punto i al punto j} \\
+            & \text{forma parte de la ruta óptima recorrida por el vehículo } k \\
+            & x_{ijk} \in \{0, 1\}
+        \end{align*}
         
         Modelamos el problema de optimización como:
         
@@ -140,14 +132,12 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
         
         \begin{figure}[!ht]
             \centering
-            \includegraphics[scale=0.3]{Figures/deliveries_plot.pdf}
+            \includegraphics[scale=0.3]{img/deliveries-plot.pdf}
             \caption{Puntos de entrega} 
             \label{puntos-entrega-mapa}
         \end{figure}
         
         Gracias a la nueva base de datos proporcionada por Coppel, hemos logrado incrementar la precisión del proceso de geo-codificación de los domicilios.
-        
-        %Después de inspeccionar el mapa generado hemos notado que hay algunos puntos que parecen tener datos geográficos erróneos, descartar la entrega a estos clientes es algo inaceptable, así que una de las siguientes tareas en el proyecto será desarrollar un método de limpieza efectivo que ayude a mejorar la información geográfica que obtengamos de cada punto.
     
     \section{Metodología}
     
@@ -174,19 +164,42 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
         \subsection{Visualización de rutas} 
             
             La visualización de rutas se realizó con la API de la librería \emph{folium}, con ella hemos generado un mapa de Monterrey en la que se visualizan las rutas que siguen todos los vehículos; el mapa también despliega información del domicilio al que se realiza la entrega, y el volumen total de los productos que debe de recibir.
-
-    \section{Resultados preliminares}
+            
+    \section{Experimentación y resultados}
+    
+        La red con la que tratamos consta de 193 nodos, 192 referentes a los clientes, y 1 nodo más para el Centro de Distribución. El número de conexiones (aristas) dentro del grafo es $193\choose2$ = $18528$
     
         Después de correr la aplicación, se desplegará el navegador el conjunto de rutas de todos los vehículos, en la figura \ref{generated-routes} podemos ver 2 de las rutas encontradas.
     
-        \begin{figure}[!ht]
+        \begin{figure}[H]
             \centering
-            \includegraphics[scale=0.3]{Figures/rutas-generadas.png}
+            \includegraphics[scale=0.3]{img/rutas-generadas.png}
             \caption{Ejemplo de rutas generadas} 
             \label{generated-routes}
         \end{figure}
         
-        Para esta simulación, la aplicación encontró un conjunto de rutas que minimizan la distancia que recorren los camiones en total hasta 480.2 km. En las mejores corridas la ruta más corta que realiza un camión es de 37.4 km, y la más larga de 100.14 km.
+        Como se puede apreciar en la tabla \ref{rutas}, para esta simulación, la aplicación encontró un conjunto de rutas que minimizan la distancia que recorren los camiones en total hasta 483.49 km. En las mejores corridas la ruta más corta que realiza un camión es de 32 km, y la más larga de 97.02 km.
+        
+        \begin{table}[H]
+            \begin{center}
+            \scalebox{0.65}{
+                \begin{tabular}{|c|c|c|c|c|}
+                    \hline
+                    Número de ruta & Clientes a visitar & Distancia recorrida (km) & Consumo gasolina (l) & Volumen libre (m\textasciicircum{}3) \\ \hline
+                    1           & 30                 & 97.02                    & 10.19                & 5.72                                 \\
+                    2           & 16                 & 57.26                    & 6.01                 & 3.09                                 \\
+                    3           & 4                  & 32.00                    & 3.36                 & 0.13                                 \\
+                    4           & 19                 & 92.00                    & 9.66                 & 4.07                                 \\
+                    5           & 28                 & 44.40                    & 4.66                 & 0                                    \\
+                    6           & 23                 & 37.49                    & 3.94                 & 0                                    \\
+                    7           & 26                 & 40.04                    & 4.20                 & 0                                    \\
+                    8           & 29                 & 42.88                    & 4.50                 & 1.10                                 \\
+                    9           & 26                 & 40.40                    & 4.24                 & 3.44                                 \\ \hline
+                \end{tabular}}
+            \end{center}
+        \caption{Rutas generadas por el programa}
+        \label{rutas}
+        \end{table}
         
     \section{Discusión} \label{discusion}
         
@@ -199,7 +212,19 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
         \subsection{Cálculo de distancia entre 2 puntos}
             
             La aplicación utiliza como métrica de distancia la distancia geodésica, que está relativamente lejos de ser una aproximación rigurosa para determinar la distancia entre 2 puntos. Sugerimos también que se adquiera una licencia comercial que calcule esta distancia. Su uso le daría una mayor validez a los resultados que encontramos.
-            
+        
+    \section{ODS}
+    
+        Igual que encontrar la ruta más eficiente para Coppel, buscamos tener un impacto social por esta razón reconocemos la importancia que tiene que la innovación trascienda los objetivos personales, así como a los objetivos colectivos. Por eso mismo, tenemos la intención de tener un impacto positivo en los Objetivos de Desarrollo Sostenible propuestos por la ONU. Una de las ODS implementadas en el proyecto es el objetivo número 9,  Industria, Innovación e Infraestructura, ya que los valores de esta ODS se alinean perfectamente con los de nuestro proyecto. Este objetivo tiene como enfoque la construcción de infraestructuras resilientes en forma de rutas adaptables que se basan en las necesidades, la industrialización sostenible en forma de la minimización de kilómetros recorridos y por lo tanto energía ocupada, e innovación de un sistema ya existente. Otro de los objetivos en los que impactamos positivamente es el número 11, Ciudades y Comunidades Sustentables, ya que reconocemos que el mundo está cada vez más urbanizado, y la sostenibilidad no se puede quedar atrás. El e-commerce está cada vez más presente en las vidas de la gente, y al minimizar los efectos negativos de esta industria es el mejor paso que podemos tomar para un futuro verde. 
+
+    \section{Conclusiones}    
+        
+        El ruteo de vehículos sigue siendo uno de los retos más relevantes para la Investigación de Operaciones, el diseño de algoritmos eficientes que logren encontrar rutas de entrega óptimas con cantidades cada vez más grandes de puntos de entrega es un imperativo para cualquier departamento de logística.
+        
+        Dado el gran número de puntos de entrega y de la enorme cantidad de posibles rutas a explorar, el uso de algoritmos heurísticos que logren encontrar rutas sub-óptimas es una alternativa a considerar para cualquier empresa; el que estos métodos puedan encontrar soluciones buenas en tiempos razonables hace que sean mucho más sencillos de implementar en producción.
+        
+        El proceso de determinar cuál es el mejor sub-conjunto de rutas tendrá tanto repercusiones económicas para la empresa como ecológicas para el ambiente, el proyecto que hemos desarrollado busca reducir la mayor cantidad de distancia recorrida posible por parte de las rutas, lo cual trae consigo una disminución del gasto realizado en el transporte de sus productos, mientras que se reducen en general las emisiones de carbono de sus vehículos.
+        
     \appendices
     
     \section{Código fuente}\label{code}
