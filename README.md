@@ -1,4 +1,4 @@
-<img src='CVRP.png' width='800'>
+<img src='img/CVRP.png' width='800'>
 
 # Capacitated Vehicle Routing Problem
 
@@ -73,7 +73,7 @@ Now, to actually solve the CVRP, we followed the guide provided by Google [here]
 
 As of now, the project is focused on solving a CVRP with 9 vehicles and a maximum load capacity of 18 cubic meters each. Using the library `folium` we generated a map that displays the 9 different routes taken by the vehicles, here's an example of the generated html file:
 
-| <img src='example-solved-vrp.png' width='800'> |
+| <img src='img/example-solved-vrp.png' width='800'> |
 |:--:|
 | *Example of 2 optimal routes found* |
 
