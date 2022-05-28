@@ -46,9 +46,9 @@ For the purposes of working with these databases we adopted the common library [
 
 [(Back to top)](#table-of-contents)
 
-After completing the cleaning stage, we have a single dataset containg all the addresses and products to be delivered to the clients. We then need a way to measure the distance between each client for the purposes of calculating the distance matrix needed to solve a CVRP. We used the geocoder `Photon` through the API made by `geopy` to obtain a list of coordinates for each address. After the geocoding process of a single address, a new column containing latitude, longitude and altitude is generated.
+After completing the cleaning stage, we have a single dataset containing all the addresses and products to be delivered to the clients. We then need a way to measure the distance between each client for the purposes of calculating the distance matrix needed to solve a CVRP. We used the geocoder `Photon` through the API made by `geopy` to obtain a list of coordinates for each address. After the geocoding process of a single address, a new column containing latitude, longitude and altitude is generated.
 
-Some serious caveats of this approach is the lack of reliability for the geocoding process, after several attempts and different proposal for addresses, we were only able to geocode at most 26% of the addresses that remained from the last stage.
+Some serious caveats of this approach is the lack of reliability for the geocoding process, after several attempts and different proposal for addresses, we were only able to geo-code at most 26% of the addresses that remained from the last stage.
 
 > It might be the case that a commercial license has a lowe rate of failure, Google's API is the most logical option given we use it's API for the next stage.
 
@@ -59,7 +59,7 @@ Some serious caveats of this approach is the lack of reliability for the geocodi
 Solving a VRP instance requires that we first determine it's nature:
 
 - Do we have volume constraints?
-- Is there a limit to how much time the vehicule can spend on the route?
+- Is there a limit to how much time the vehicle can spend on the route?
 - What about the distance it travels, is there a limit to it?
 - A mix of all the examples above.
 
@@ -71,7 +71,7 @@ Now, to actually solve the CVRP, we followed the guide provided by Google [here]
 
 [(Back to top)](#table-of-contents)
 
-As of now, the project is focused on solving a CVRP with 9 vehicules and a maximum load capacity of 18 cubic meters each. Using the library `folium` we generated a map that displays the 9 different routes taken by the vehicles, here's an example of the generated html file:
+As of now, the project is focused on solving a CVRP with 9 vehicles and a maximum load capacity of 18 cubic meters each. Using the library `folium` we generated a map that displays the 9 different routes taken by the vehicles, here's an example of the generated html file:
 
 | <img src='example-solved-vrp.png' width='800'> |
 |:--:|
