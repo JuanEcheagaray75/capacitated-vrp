@@ -30,7 +30,7 @@ def solver() -> (list, int):
     def print_solution(data, manager, routing, solution):
 
         """Prints solution on console."""
-        print(f'Objective: {solution.ObjectiveValue()}')
+        # print(f'Objective: {solution.ObjectiveValue()}')
         total_distance = 0
         total_load = 0
         route_volume = []
@@ -62,14 +62,14 @@ def solver() -> (list, int):
             load_per_vehicle.append(route_load / 100)
             plan_output += 'Load of the route: {}\n'.format(route_load / 100)
             
-            print(plan_output)
+            # print(plan_output)
             total_distance += route_distance
             total_load += route_load
             route_volume.append(route_load / 100)
 
         distance_traveled = total_distance
-        print('Total distance of all routes: {} km'.format(total_distance / 100))
-        print('Total load of all routes: {}'.format(total_load / 100))
+        # print('Total distance of all routes: {} km'.format(total_distance / 100))
+        # print('Total load of all routes: {}'.format(total_load / 100))
         # print(f'Distance per vehicle : {distance_per_vehicle}')
         # print(f'Load per vehicle : {load_per_vehicle}')
         return distance_traveled, total_load, route_volume, distance_per_vehicle, load_per_vehicle
