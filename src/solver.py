@@ -118,16 +118,20 @@ def solver() -> (list, int):
 
     # Setting first solution heuristic.
     search_parameters = pywrapcp.DefaultRoutingSearchParameters()
+    # See https://developers.google.com/optimization/routing/tsp#search_strategy
+    # Initialize the solution with a Greedy Approach
     search_parameters.first_solution_strategy = (routing_enums_pb2.FirstSolutionStrategy.PATH_CHEAPEST_ARC)
+    # Use Guided Local Search as the metaheuristic for optimization
     search_parameters.local_search_metaheuristic = (routing_enums_pb2.LocalSearchMetaheuristic.GUIDED_LOCAL_SEARCH)
-    search_parameters.time_limit.FromSeconds(1)
+    # The longer the time limit, the more likely the metaheuristic will find an optimal solution
+    search_parameters.time_limit.FromSeconds(4)
 
     # Solve the problem.
     solution = routing.SolveWithParameters(search_parameters)
 
     # Print solution on console.
     if solution:
-        distance_traveled, vehicle_load, route_volume, distance_per_vehicle, load_per_vehicle = print_solution(data, manager, routing, solution)
+        distance_traveled, vehicle_load, _, distance_per_vehicle, load_per_vehicle = print_solution(data, manager, routing, solution)
         return routes_taken, distance_traveled, vehicle_load, distance_per_vehicle, load_per_vehicle
     else:
         print('No solution found.')
