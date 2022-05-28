@@ -11,7 +11,9 @@
 
 - [ ] Table of results
   - [ ] Time of execution
-  - [ ] Wasted volume
+  - [x] Wasted volume per vehicle
+  - [x] Traveled distance per vehicle
+  - [x] Load per vehicle
 - [ ] Properly define the study case
   - [ ] Focus on a certain area of the city
   - [ ] Use traffic
