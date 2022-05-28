@@ -1,0 +1,1 @@
+time source run.sh
