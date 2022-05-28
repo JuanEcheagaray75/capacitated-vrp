@@ -1,9 +1,11 @@
 # Virtual environment
 .venv
 
-# Data
-*.xls
-*.csv
+# Ignore the data folder
+data/*
+!data/processed
+data/processed/*
+!data/processed/best_route.csv
 
 # Maps
 *.html
@@ -11,7 +13,6 @@
 # Python cache files
 *.pyc
 
-# Latex
 # Latex
 *.aux
 *.glo
