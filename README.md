@@ -77,6 +77,12 @@ As of now, the project is focused on solving a CVRP with 9 vehicles and a maximu
 |:--:|
 | *Example of 2 optimal routes found* |
 
+To arrive at this result we first needed to determine the right set of hyper-parameters to fetch to the solver. For more details please consult our technical report. One of the most important figures is presented below, it shows the time we allowed each iteration of the solver to run vs the found optimal solution.
+
+| <img src='img/time-vs-distance.png' width='800'> |
+|:--:|
+| *Example of 2 optimal routes found* |
+
 ## Installation and usage
 
 [(Back to top)](#table-of-contents)
