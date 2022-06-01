@@ -44,7 +44,7 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
         
     \section{Objeto de estudio} \label{sec:case-study}
 
-        Nuestra implementación se enfoca en resolver el problema de ruteo para la entrega de productos, siendo esto un problema conocido como CVRP (Capacitated Vehicle RoutingProblem); en este se busca encontrar un conjunto de rutas para una flotilla de vehículos que tenga el menor costo de ruta en el que se realicen todas las entregas necesarias. Cada uno de los vehículos de la flotilla sale del mismo centro de distribución, y al final de su ruta debe de regresar a este.
+        Nuestra implementación se enfoca en resolver el problema de ruteo para la entrega de productos, siendo esto un problema conocido como CVRP (Capacitated Vehicle RoutingProblem); en este se busca encontrar un conjunto de rutas para una flotilla de vehículos que tenga el menor costo de ruta en el que se realicen todas las entregas necesarias. Cada uno de los vehículos de la flotilla sale del mismo centro de distribución, y al final de su ruta debe de regresar a este \cite{elshaer2020taxonomic}.
 
         Los vehículos solamente realizarán entregas a los clientes de la empresa, es decir, no habrá etapa alguna de carga de paquetes más que en el centro de distribución; aunado a esto, cada uno de los clientes se visitar una sola vez, esto hace referencia a que si uno de los clientes ordenó más de un producto, se entregarán todas sus ordenes en el momento en que sea visitado.
         
@@ -152,17 +152,15 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
     
     \section{Metodología}
     
-        Para la solución de esta problemática hemos usado el lenguaje de programación Python; para los procesos de lectura, limpieza, exploración y agregación de datos hemos usado la librería \emph{pandas} en conjunto con \emph{matplotlib} y \emph{seaborn}, para la solución del problema de programación lineal usamos la librería \emph{ortools} de Google, y para la visualización de los rutas generadas hemos usado \emph{folium}. Una liga al código fuente que hemos desarrollado se encuentra en el apéndice \ref{code}.
+        Para la solución de esta problemática hemos usado el lenguaje de programación Python; para los procesos de lectura, limpieza, exploración y agregación de datos hemos usado la librería \emph{pandas} en conjunto con \emph{matplotlib} y \emph{seaborn}, para la solución del problema de programación lineal usamos la librería \emph{ortools} de Google, y para la visualización de los rutas generadas hemos usado \emph{folium}. Una liga al código fuente que hemos desarrollado se encuentra en el apéndice \ref{code:repo}.
         
-        El dispositivo que usamos para desarrollar y correr la aplicación disponía de un CPU Intel i5 con 8 GB de memoria RAM, como sistema operativo se ha usado Ubuntu 20.04 LTS.
-    
         \subsection{Limpieza de la base de datos} \label{stage 1}
             
             Hemos recibido 4 bases de datos. Una conteniendo las direcciones de los centros de distribución de la emppresa en México, un archivo que contiene un listado de todos los productos que vende la empresa más algunas de sus propiedades, en particular nos interesa el volumen de cada artículo. Disponemos también de un archivo que contiene todos los tipos de vehículos que la empresa usa para realizar las entregas, y una base de datos que contiene un listado de las entregas que se deben de realizar.
             
         \subsection{Procesamiento de domicilios} \label{stage 2}
         
-            Para la geo-codificación de los domicilios hemos usado la librería \emph{Photon}, desde el paso anterior hemos creado una columna que contiene todos los datos de referencias de los domicilios de los compradores. El proceso de geo-codificación toma un tiempo promedio de 15 minutos en la máquina que usamos, en promedio se logran codificar 25\% de los domicilios que recibe. Al final de este proceso tenemos las coordenadas asociadas a cada uno de los domicilios
+            Para la geo-codificación de los domicilios hemos usado la librería \emph{Photon}, desde el paso anterior hemos creado una columna que contiene todos los datos de referencias de los domicilios de los compradores. El proceso de geo-codificación toma un tiempo promedio de 15 minutos en la máquina que usamos, en promedio se logran codificar 25\% de los domicilios que recibe. Al final de este proceso tenemos las coordenadas asociadas a cada uno de los domicilios.
 
         \subsection{Cálculo de matriz de distancias} \label{stage 3}
             
@@ -216,7 +214,7 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
         
     \section{ODS}
     
-        Igual que encontrar la ruta más eficiente para la empresa, buscamos tener un impacto social por esta razón reconocemos la importancia que tiene que la innovación trascienda los objetivos personales, así como a los objetivos colectivos. Por eso mismo, tenemos la intención de tener un impacto positivo en los Objetivos de Desarrollo Sostenible propuestos por la ONU. 
+        Igual que encontrar la ruta más eficiente para la empresa, buscamos tener un impacto social por esta razón reconocemos la importancia que tiene que la innovación trascienda los objetivos personales, así como a los objetivos colectivos. Por eso mismo, tenemos la intención de tener un impacto positivo en los Objetivos de Desarrollo Sostenible propuestos por la ONU \cite{united-nations-2015}. 
         
         Una de las ODS implementadas en el proyecto es el objetivo número 9,  Industria, Innovación e Infraestructura, ya que los valores de esta ODS se alinean perfectamente con los de nuestro proyecto. Este objetivo tiene como enfoque la construcción de infraestructuras resilientes en forma de rutas adaptables que se basan en las necesidades, la industrialización sostenible en forma de la minimización de kilómetros recorridos y por lo tanto energía ocupada, e innovación de un sistema ya existente. 
         
