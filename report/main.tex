@@ -46,7 +46,7 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
 
     \section{Trabajo relacionado} \label{sec:related-work}
     
-        El \emph{Travelling Salesman Problem}, conocido como \emph{Problema del Agente Viajero} en español, es un problema que se encarga de buscar la ruta más corta y eficiente para llegar a un destino. Esta se basa en que existen múltiples opciones de llegar a un mismo destino, pero enfocándose en reducir costos de transporte, por lo que obtenemos de solución la ruta más corta \cite{trevelingProb}.
+        El \emph{Traveling Salesman Problem}, conocido como \emph{Problema del Agente Viajero} en español, es un problema que se encarga de buscar la ruta más corta y eficiente para llegar a un destino. Esta se basa en que existen múltiples opciones de llegar a un mismo destino, pero enfocándose en reducir costos de transporte, por lo que obtenemos de solución la ruta más corta \cite{trevelingProb}.
 
         Para ésta problemática se tiene contemplado que entre más destinos haya automáticamente el nivel de complejidad para el cálculo de la solución óptima aumenta. Por esta razón TSP es clasificado como un problema de NP-Hard, de acuerdo con la teoría de la complejidad computacional \cite{trevelingProb}.
 
@@ -71,20 +71,10 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
         Los vehículos solamente realizarán entregas a los clientes de la empresa, es decir, no habrá etapa alguna de carga de paquetes más que en el centro de distribución; aunado a esto, cada uno de los clientes se visitará una sola vez, esto hace referencia a que si uno de los clientes ordenó más de un producto, se entregarán todas sus ordenes en el momento en que sea visitado.
 
         No se toma en cuenta un límite de distancia recorrida por vehículo ni tampoco se consideran ventanas de tiempo para realizar las entregas. Finalmente, se considera que el entorno de trabajo es determinista, no se modela de forma estocástica el tiempo de ruta entre 2 puntos, ni existe aleatoriedad en las demandas de los clientes.
-        % - Se enfoca en el VRP con restricciones de capacidad
-        % - Solamente se realizan entregas, no se recogen objetos
-        % - Entorno determinista
-        %     - No se toma en cuenta el tráfico
-        % - No hay límites de distancia recorrida por vehículo
-        % - Solamente existe un centro de distribución
-        % - No se establece un límite de horario
 
     \section{Objetivos}
 
-        % - Encontrar una solución cercana al óptimo al CVRP
-        %     - Encontrar un conjunto de n rutas (n = número de vehículos) que realicen todas las entregas de la empresa en 1 daría
-        %     - Rutas que minimicen la distancia total recorrida
-        %     - Respetar los límites de capacidad de cada vehículo
+        El objetivo principal de nuestro trabajo es encontrar una solución al CVRP que se acerque a la optimalidad. De forma específica, se desea encontrar un conjunto de $n$ rutas que realicen todas las entregas de 1 día para la empresa, estas rutas deben de minimizar la distancia total recorrida así como respetar la capacidad máxima de carga de cada uno de los vehículos.
 
     \section{Hipótesis} \label{sec:hyp}
             
