@@ -44,7 +44,19 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
         
             El comercio electrónico, e-commerce, consiste en realizar transacciones por medios digitales, e incluye distribución, venta, compra, marketing y suministro de información de productos o servicios \cite{visand}. Al buscar las empresas más exitosas, hay muy pocas que no integran el e-commerce como parte integral de su modelo. Le da a las empresas la posibilidad de crear una economía de plataforma \cite{dekker-supremacy} en la que pueden mantener un número relativamente bajo de empleados, cosa que es conveniente para las empresas. Es un mercado que no muestra indicaciones de frenar su crecimiento. De acuerdo a los datos de Stephanie Chevalier en Statista, del 2014 al 2021, las ventas de e-commerce han subido de 1,336 a 4,938 billones de dólares. Uno de los culpables de este crecimiento es lo cómodo que es para el cliente dar un click y recibir lo que quiere en la puerta de su casa. Por medio del e-comercio, el cliente puede observar todos los productos disponibles, ordenar lo que quiera desde la comodidad de su hogar, y simplemente esperar el tiempo de llegada. Para que esto se lleve a cabo de la mejor manera, se debe diseñar una política de reparto eficiente.
 
-    \section{Trabajo relacionado} \label{sec:related-work}
+    \section{Objeto de estudio} \label{sec:case-study}
+
+        Nuestra implementación se enfoca en resolver el VRP básico, conocido como CVRP (\emph{Capacitated Vehicle Routing Problem}); en este se busca encontrar un conjunto de rutas para una flotilla de vehículos que tenga el menor costo de ruta en el que se realicen todas las entregas necesarias. Cada uno de los vehículos de la flotilla sale del mismo centro de distribución, y al final de su ruta debe de regresar a este.
+
+        Los vehículos solamente realizarán entregas a los clientes de la empresa, es decir, no habrá etapa alguna de carga de paquetes más que en el centro de distribución; aunado a esto, cada uno de los clientes se visitará una sola vez, esto hace referencia a que si uno de los clientes ordenó más de un producto, se entregarán todas sus ordenes en el momento en que sea visitado.
+
+        No se toma en cuenta un límite de distancia recorrida por vehículo ni tampoco se consideran ventanas de tiempo para realizar las entregas. Finalmente, se considera que el entorno de trabajo es determinista, no se modela de forma estocástica el tiempo de ruta entre 2 puntos, ni existe aleatoriedad en las demandas de los clientes.
+    
+    \section{Planteamiento del problema} \label{sec:problem}
+
+    \section{Justificación} \label{sec:justification}
+
+    \section{Marco teórico} \label{sec:theoretical}
     
         El \emph{Traveling Salesman Problem}, conocido como \emph{Problema del Agente Viajero} en español, es un problema que se encarga de buscar la ruta más corta y eficiente para llegar a un destino. Esta se basa en que existen múltiples opciones de llegar a un mismo destino, pero enfocándose en reducir costos de transporte, por lo que obtenemos de solución la ruta más corta \cite{trevelingProb}.
 
@@ -64,17 +76,9 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
         
             Consiste en la enumeración sistemática de todas las posibles rutas de distribución, se calcula y compara todas las posibles soluciones revisando cuál o cuáles de ellas cumplen mejor a los objetivos de la empresa. Esto con el fin de establecer una única solución, que para el caso de este problema, sería la más corta y por ende la óptima \cite{trevelingProb}.
     
-    \section{Objeto de estudio}
-
-        Nuestra implementación se enfoca en resolver el VRP básico, conocido como CVRP (\emph{Capacitated Vehicle Routing Problem}); en este se busca encontrar un conjunto de rutas para una flotilla de vehículos que tenga el menor costo de ruta en el que se realicen todas las entregas necesarias. Cada uno de los vehículos de la flotilla sale del mismo centro de distribución, y al final de su ruta debe de regresar a este.
-
-        Los vehículos solamente realizarán entregas a los clientes de la empresa, es decir, no habrá etapa alguna de carga de paquetes más que en el centro de distribución; aunado a esto, cada uno de los clientes se visitará una sola vez, esto hace referencia a que si uno de los clientes ordenó más de un producto, se entregarán todas sus ordenes en el momento en que sea visitado.
-
-        No se toma en cuenta un límite de distancia recorrida por vehículo ni tampoco se consideran ventanas de tiempo para realizar las entregas. Finalmente, se considera que el entorno de trabajo es determinista, no se modela de forma estocástica el tiempo de ruta entre 2 puntos, ni existe aleatoriedad en las demandas de los clientes.
-
     \section{Objetivos}
 
-        El objetivo principal de nuestro trabajo es encontrar una solución al CVRP que se acerque a la optimalidad. De forma específica, se desea encontrar un conjunto de $n$ rutas que realicen todas las entregas de 1 día para la empresa, estas rutas deben de minimizar la distancia total recorrida así como respetar la capacidad máxima de carga de cada uno de los vehículos.
+        El objetivo principal de nuestro trabajo es generar una metodología para resolver el problema de generación de rutas de entrega para una empresa de e-commerce que se acerque a la optimalidad. De forma específica, se desea encontrar un conjunto de n rutas que realicen todas las entregas de 1 día para la empresa, estas rutas deben de minimizar la distancia total recorrida as ́ı como respetar la capacidad máxima de carga de cada uno de los vehículos.
 
     \section{Hipótesis} \label{sec:hyp}
             
