@@ -39,57 +39,17 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
     \end{IEEEkeywords}
 
     \section{Introducción} \label{sec:intro} % Abstract expandido, tiene que incluir como está repartido el escrito
-
-        \subsection{Introducción al E-Commerce}
         
-            El comercio electrónico, e-commerce, consiste en realizar transacciones por medios digitales, e incluye distribución, venta, compra, marketing y suministro de información de productos o servicios \cite{visand}. Al buscar las empresas más exitosas, hay muy pocas que no integran el e-commerce como parte integral de su modelo. Le da a las empresas la posibilidad de crear una economía de plataforma \cite{dekker-supremacy} en la que pueden mantener un número relativamente bajo de empleados, cosa que es conveniente para las empresas. Es un mercado que no muestra indicaciones de frenar su crecimiento. De acuerdo a los datos de Stephanie Chevalier en Statista, del 2014 al 2021, las ventas de e-commerce han subido de 1,336 a 4,938 billones de dólares. Uno de los culpables de este crecimiento es lo cómodo que es para el cliente dar un click y recibir lo que quiere en la puerta de su casa. Por medio del e-comercio, el cliente puede observar todos los productos disponibles, ordenar lo que quiera desde la comodidad de su hogar, y simplemente esperar el tiempo de llegada. Para que esto se lleve a cabo de la mejor manera, se debe diseñar una política de reparto eficiente.
-
     \section{Objeto de estudio} \label{sec:case-study}
 
         Nuestra implementación se enfoca en resolver el problema de ruteo para la entrega de productos, siendo esto un problema conocido como CVRP (Capacitated Vehicle RoutingProblem); en este se busca encontrar un conjunto de rutas para una flotilla de vehículos que tenga el menor costo de ruta en el que se realicen todas las entregas necesarias. Cada uno de los vehículos de la flotilla sale del mismo centro de distribución, y al final de su ruta debe de regresar a este.
 
-        Los vehículos solamente realizar ́an entregas a los clientes de la empresa, es decir, no habrá etapa alguna de carga de paquetes m ́as que en el centro de distribución; aunado a esto, cada uno de los clientes se visitar ́a una sola vez, esto hace referencia a que si uno de los clientes orden ́o m ́as de un producto, se entregar ́an todas sus ordenes en el momento en que sea visitado.
+        Los vehículos solamente realizarán entregas a los clientes de la empresa, es decir, no habrá etapa alguna de carga de paquetes más que en el centro de distribución; aunado a esto, cada uno de los clientes se visitar una sola vez, esto hace referencia a que si uno de los clientes ordenó más de un producto, se entregarán todas sus ordenes en el momento en que sea visitado.
         
         No se toma en cuenta un límite de distancia recorrida por vehículo ni tampoco se consideran ventanas de tiempo para realizar las entregas.
     
     \section{Planteamiento del problema} \label{sec:problem}
 
-        El comercio electrónico, e-commerce, consiste en realizar transacciones por medios digitales, e incluye distribución, venta, compra, marketing y suministro de información de productos o servicios \cite{visand}. Al buscar las empresas más exitosas, hay muy pocas que no integran el e-commerce como parte integral de su modelo. Le da a las empresas la posibilidad de crear una economía de plataforma \cite{dekker-supremacy} en la que pueden mantener un número relativamente bajo de empleados, cosa que es conveniente para las empresas. 
-        
-        Este un mercado que no muestra indicaciones de frenar su crecimiento. De acuerdo a los datos de Stephanie Chevalier en Statista, del 2014 al 2021, las ventas de e-commerce han subido de 1,336 a 4,938 billones de dólares. Uno de los culpables de este crecimiento es lo cómodo que es para el cliente dar un click y recibir lo que quiere en la puerta de su casa. Por medio del e-comercio, el cliente puede observar todos los productos disponibles, ordenar lo que quiera desde la comodidad de su hogar, y simplemente esperar el tiempo de llegada. Para que esto se lleve a cabo de la mejor manera, se debe diseñar una política de reparto eficiente.
-
-    \section{Justificación} \label{sec:justification}
-
-    \section{Marco teórico} \label{sec:theoretical}
-    
-        El \emph{Traveling Salesman Problem}, conocido como \emph{Problema del Agente Viajero} en español, es un problema que se encarga de buscar la ruta más corta y eficiente para llegar a un destino. Esta se basa en que existen múltiples opciones de llegar a un mismo destino, pero enfocándose en reducir costos de transporte, por lo que obtenemos de solución la ruta más corta \cite{trevelingProb}.
-
-        Para ésta problemática se tiene contemplado que entre más destinos haya automáticamente el nivel de complejidad para el cálculo de la solución óptima aumenta. Por esta razón TSP es clasificado como un problema de NP-Hard, de acuerdo con la teoría de la complejidad computacional \cite{trevelingProb}.
-
-        Para la solución de este problema existen diferentes métodos debido a la popularidad y complejidad que tiene, estos son algunos de ellos:
-        
-        \subsubsection{Vecino más cercano}
-        
-            También conocido como KNN, este es uno de los algoritmos más simples para resolver este problema. Se trata de un método de aprendizaje automático básico aplicado para la logística de transporte, en este caso, el conductor -o agente viajero- siempre comienza su recorrido con el destino más cercano. Aunque para este método la solución encontrada no siempre logra la optimización \cite{trevelingProb}.
-
-        \subsubsection{Ramificación y atadura}
-        
-            El método Branch and Bound es un algoritmo complejo diseñado para solucionar problemas que cuentan con variables de decisión enteras; para este método, el problema se divide en múltiples sub-problemas donde cada uno de estos tiene varias soluciones posibles. Se debe destacar que al seleccionar una solución, esta puede afectar en las posibles soluciones de sub-problemas posteriores, ya que como su nombre lo indica, actúa de manera ramificada. Este método se aplica como solución del problema del vendedor viajero \cite{trevelingProb}.
-
-        \subsubsection{Fuerza bruta}
-        
-            Consiste en la enumeración sistemática de todas las posibles rutas de distribución, se calcula y compara todas las posibles soluciones revisando cuál o cuáles de ellas cumplen mejor a los objetivos de la empresa. Esto con el fin de establecer una única solución, que para el caso de este problema, sería la más corta y por ende la óptima \cite{trevelingProb}.
-    
-    \section{Objetivos}
-
-        El objetivo principal de nuestro trabajo es generar una metodología para resolver el problema de generación de rutas de entrega para una empresa de e-commerce que se acerque a la optimalidad. De forma específica, se desea encontrar un conjunto de n rutas que realicen todas las entregas de 1 día para la empresa, estas rutas deben de minimizar la distancia total recorrida as ́ı como respetar la capacidad máxima de carga de cada uno de los vehículos.
-
-    \section{Hipótesis} \label{sec:hyp}
-            
-        Proponemos una implementación que es capaz de obtener resultados cercanos a la solución óptima en tiempos aceptables con un costo computacional bajo, en relación a otras implementaciones.
-
-    \section{Definición del problema} \label{definition}
-        
         Sean los conjuntos:
         \begin{align*}
             & i \in \{1, \dots, n \} \\
@@ -117,19 +77,19 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
         Modelamos el problema de optimización como:
         
         \begin{equation*}
-        	\begin{aligned}
-        		\text{min } \quad & z = \sum_{k=1}^{V} \sum_{j=1}^{n} \sum_{i=1}^{n} c_{ij} x_{ijk}\\
-        		\text{sujeto a: }\quad &
-        		\begin{array}{c}
-        			\displaystyle\sum_{i=1}^{n} x_{ijk} = \sum_{i=1}^{n} x_{jik} \\[3pt]
+            \begin{aligned}
+                \text{min } \quad & z = \sum_{k=1}^{V} \sum_{j=1}^{n} \sum_{i=1}^{n} c_{ij} x_{ijk}\\
+                \text{sujeto a: }\quad &
+                \begin{array}{c}
+                    \displaystyle\sum_{i=1}^{n} x_{ijk} = \sum_{i=1}^{n} x_{jik} \\[3pt]
                     \displaystyle\sum_{k=1}^{V} \sum_{i=1}^{n} x_{ijk} = 1 \\[3pt]
                     \displaystyle\sum_{j=2}^{n} x_{1jk} = 1 \\[3pt]
                     \displaystyle\sum_{i=1}^{n} \sum_{j=2}^{n} d_{j} x_{ijk} \leq Q \\[3pt]
                     u_{j} - u_{i} \geq d_j - Q (1 - x_{ijk}) \\[3pt]
                     d_i \leq u_i \leq Q \\[3pt]
                     x_{ijk} \in \{0, 1\}
-        		\end{array}
-        	\end{aligned}
+                \end{array}
+            \end{aligned}
         \end{equation*}
         
         Las restricciones anteriores hacen referencia a:
@@ -144,6 +104,43 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
         Para la problemática actual, estamos planeando realizar 192 entregas ($n$), se dispondrán de 9 vehículos $(V)$, cada uno de ellos tendrá una capacidad máxima de carga de 18 $m^3$ ($Q$). Los valores numéricos para las demandas y distancias son calculados dentro de la aplicación.
         
         El heurístico que usamos en nuestro modelo es el costo asociado de ir de un punto de la ciudad a otro. No estamos modelando la distancia que hay entre cada punto como la distancia manejando, sino que estamos usando la distancia geodésica que hay entre cada punto, una gran desventaja del uso de este heurístico es que puede generar rutas aparentemente óptimas pero que no son factibles cuando se agregan las posibles maneras de conectar los puntos de entrega. Hemos decidido seguir adelante con este heurístico ya que hay varios proyectos reconocidos que usan este heurístico para resolver problemas de ruteo de vehículos \cite{ERDOGAN201762}.
+
+    \section{Justificación} \label{sec:justification}
+
+        El comercio electrónico, e-commerce, consiste en realizar transacciones por medios digitales, e incluye distribución, venta, compra, marketing y suministro de información de productos o servicios \cite{visand}. Al buscar las empresas más exitosas, hay muy pocas que no integran el e-commerce como parte integral de su modelo. Le da a las empresas la posibilidad de crear una economía de plataforma \cite{dekker-supremacy} en la que pueden mantener un número relativamente bajo de empleados, cosa que es conveniente para las empresas. Es un mercado que no muestra indicaciones de frenar su crecimiento. 
+        
+        Solamente en los Estados Unidos se gastaron \$ 1.7 billones de dólares en e-commerce durante estos últimos años de pandemia, son \$609 mil millones de dólares más que antes de la pandemia, siendo un crecimiento del 55\%. Uno de los culpables de este crecimiento es lo cómodo que es para el cliente dar un click y recibir lo que quiere en la puerta de su casa. Por medio del e-comercio, el cliente puede observar todos los productos disponibles, ordenar lo que quiera desde la comodidad de su hogar, y simplemente esperar el tiempo de llegada. Para que esto se lleve a cabo de la mejor manera, se debe diseñar una política de reparto eficiente.
+
+    \section{Marco teórico} \label{sec:theoretical}
+    
+        El \emph{Traveling Salesman Problem}, conocido como \emph{Problema del Agente Viajero} en español, es un problema que se encarga de buscar la ruta más corta y eficiente para llegar a un destino. Esta se basa en que existen múltiples opciones de llegar a un mismo destino, pero enfocándose en reducir costos de transporte, por lo que obtenemos de solución la ruta más corta \cite{trevelingProb}.
+
+        Para ésta problemática se tiene contemplado que entre más destinos haya automáticamente el nivel de complejidad para el cálculo de la solución óptima aumenta. Por esta razón TSP es clasificado como un problema de NP-Hard, de acuerdo con la teoría de la complejidad computacional \cite{trevelingProb}.
+
+        Para la solución de este problema existen diferentes métodos debido a la popularidad y complejidad que tiene, estos son algunos de ellos:
+        
+        \subsubsection{Vecino más cercano}
+        
+            También conocido como KNN, este es uno de los algoritmos más simples para resolver este problema. Se trata de un método de aprendizaje automático básico aplicado para la logística de transporte, en este caso, el conductor -o agente viajero- siempre comienza su recorrido con el destino más cercano. Aunque para este método la solución encontrada no siempre logra la optimización \cite{trevelingProb}.
+
+        \subsubsection{Ramificación y atadura}
+        
+            El método Branch and Bound es un algoritmo complejo diseñado para solucionar problemas que cuentan con variables de decisión enteras; para este método, el problema se divide en múltiples sub-problemas donde cada uno de estos tiene varias soluciones posibles. Se debe destacar que al seleccionar una solución, esta puede afectar en las posibles soluciones de sub-problemas posteriores, ya que como su nombre lo indica, actúa de manera ramificada. Este método se aplica como solución del problema del vendedor viajero \cite{trevelingProb}.
+
+        \subsubsection{Fuerza bruta}
+        
+            Consiste en la enumeración sistemática de todas las posibles rutas de distribución, se calcula y compara todas las posibles soluciones revisando cuál o cuáles de ellas cumplen mejor a los objetivos de la empresa. Esto con el fin de establecer una única solución, que para el caso de este problema, sería la más corta y por ende la óptima \cite{trevelingProb}.
+    
+    \section{Objetivos}
+
+        El objetivo principal de nuestro trabajo es generar una metodología para resolver el problema de generación de rutas de entrega para una empresa de e-commerce que se acerque a la optimalidad. De forma específica, se desea encontrar un conjunto de n rutas que realicen todas las entregas de 1 día para la empresa, estas rutas deben de minimizar la distancia total recorrida así como respetar la capacidad máxima de carga de cada uno de los vehículos.
+
+    \section{Hipótesis} \label{sec:hyp}
+            
+        Proponemos una implementación que es capaz de obtener resultados cercanos a la solución óptima en tiempos aceptables con un costo computacional bajo, en relación a otras implementaciones.
+
+    \section{Definición del problema} \label{definition}
+        
     
     \section{Puntos de entrega}
         
