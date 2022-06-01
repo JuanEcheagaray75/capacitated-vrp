@@ -8,10 +8,8 @@
 \usepackage[spanish]{babel}
 \usepackage{cite}
 \usepackage{hyperref}
-
 \usepackage{float}
 \usepackage{csvsimple}
-
 \usepackage{atbegshi} % erase first blank page
 \AtBeginDocument{\AtBeginShipoutNext{\AtBeginShipoutDiscard}}
 
@@ -21,7 +19,8 @@
 Optimización determinista \\
 MA2001B.200 \\
 Dr. Fernando Elizalde Ramírez \\
-Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops 
+Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
+
 \begin{document}
 
     \thanks{Verónica Victoria García De la Fuente, Emily Rebeca Méndez Cruz, Carolina Longoria Lozano, Juan Pablo Echeagaray González pertencen al Tec de Monterrey Campus Monterrey, N.L. C.P. 64849, Mexico {\tt\small}}
@@ -36,16 +35,10 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
     \end{abstract}
 
     \begin{IEEEkeywords} 
-        CVRP, Programación Entera, Coppel, Rutas
+        CVRP, Programación Entera, Rutas, Metaheurísticos
     \end{IEEEkeywords}
 
-    \section{INTRODUCCIÓN} 
-        
-        \subsection{Introducción sobre Coppel}
-        
-            Coppel es una empresa multiproducto que lleva años volviéndose la empresa que es el día de hoy. Fundada en 1941, Coppel empezó como una tienda de radios y relojes, y tras la Segunda Guerra Mundial tuvieron la idea de comenzar a vender a crédito. 80 años después, Coppel es una empresa reconocida nacional e internacionalmente, con un enfoque comercial. Crecieron, no sólo su propia marca y nombre, sino también la cantidad de marcas que se pueden encontrar en las tiendas \cite{Coppel}. De acuerdo a Linkedin, Coppel tiene 14,682 colaboradores y 1,228 sucursales, en más de 450 ciudades del país. Una gran parte de su funcionamiento se da por medio de e-commerce, dando la opción a sus clientes de volverse “Clientes Digitales” \cite{linkedin_2022}.
-
-           
+    \section{Introducción} % Abstract expandido
 
         \subsection{Introducción al E-Commerce}
         
@@ -70,7 +63,15 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
             \subsubsection{Fuerza bruta}
             
                 Consiste en la enumeración sistemática de todas las posibles rutas de distribución, se calcula y compara todas las posibles soluciones revisando cuál o cuáles de ellas cumplen mejor a los objetivos de la empresa. Esto con el fin de establecer una única solución, que para el caso de este problema, sería la más corta y por ende la óptima \cite{trevelingProb}.
-        
+    
+    \section{Objeto de estudio}
+
+    \section{Objetivos}
+
+    \section{Hipótesis} \label{sec:hyp}
+            
+        Proponemos una implementación que es capaz de obtener resultados cercanos a la solución óptima en tiempos aceptables con un costo computacional bajo, en relación a otras implementaciones.
+
     \section{Definición del problema} \label{definition}
         
         Sean los conjuntos:
@@ -138,8 +139,6 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
             \caption{Puntos de entrega} 
             \label{puntos-entrega-mapa}
         \end{figure}
-        
-        Gracias a la nueva base de datos proporcionada por Coppel, hemos logrado incrementar la precisión del proceso de geo-codificación de los domicilios.
     
     \section{Metodología}
     
@@ -149,11 +148,11 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
     
         \subsection{Limpieza de la base de datos} \label{stage 1}
             
-            Hemos recibido 4 bases de datos. Una conteniendo las direcciones de los centros de distribución de Coppel en México, un archivo que contiene un listado de todos los productos que vende la empresa más algunas de sus propiedades, en particular nos interesa el volumen de cada artículo. Disponemos también de un archivo que contiene todos los tipos de vehículos que Coppel usa para realizar las entregas, y una base de datos que contiene un listado de las entregas que Coppel debe de realizar.
+            Hemos recibido 4 bases de datos. Una conteniendo las direcciones de los centros de distribución de la emppresa en México, un archivo que contiene un listado de todos los productos que vende la empresa más algunas de sus propiedades, en particular nos interesa el volumen de cada artículo. Disponemos también de un archivo que contiene todos los tipos de vehículos que la empresa usa para realizar las entregas, y una base de datos que contiene un listado de las entregas que se deben de realizar.
             
         \subsection{Procesamiento de domicilios} \label{stage 2}
         
-            Para la geocodificación de los domicilios hemos usado la librería \emph{Photon}, desde el paso anterior hemos creado una columna que contiene todos los datos de referencias de los domicilios de los compradores. El proceso de geocodificación toma un tiempo promedio de 15 minutos en la máquina que usamos, en promedio se logran codificar 25\% de los domicilios que recibe. Al final de este proceso tenemos las coordenadas asociadas a cada uno de los domicilios
+            Para la geo-codificación de los domicilios hemos usado la librería \emph{Photon}, desde el paso anterior hemos creado una columna que contiene todos los datos de referencias de los domicilios de los compradores. El proceso de geo-codificación toma un tiempo promedio de 15 minutos en la máquina que usamos, en promedio se logran codificar 25\% de los domicilios que recibe. Al final de este proceso tenemos las coordenadas asociadas a cada uno de los domicilios
 
         \subsection{Cálculo de matriz de distancias} \label{stage 3}
             
@@ -199,7 +198,7 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
         
         \subsection{Geo-codificación de los domicilios}
             
-            Actualmente la aplicación hace uso de una librería de libre uso llamada \emph{Photon} para geo-codificar los domicilios disponibles en la base de datos; consideramos que la adquisición de una licencia comercial podría aumentar aún más el número de domicilios que son geo-codificados con éxito.
+            Actualmente la aplicación hace uso de una librería de libre distribución llamada \emph{Photon} para geo-codificar los domicilios disponibles en la base de datos; consideramos que la adquisición de una licencia comercial podría aumentar aún más el número de domicilios que son geo-codificados con éxito.
             
         \subsection{Cálculo de distancia entre 2 puntos}
             
@@ -207,7 +206,11 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
         
     \section{ODS}
     
-        Igual que encontrar la ruta más eficiente para Coppel, buscamos tener un impacto social por esta razón reconocemos la importancia que tiene que la innovación trascienda los objetivos personales, así como a los objetivos colectivos. Por eso mismo, tenemos la intención de tener un impacto positivo en los Objetivos de Desarrollo Sostenible propuestos por la ONU. Una de las ODS implementadas en el proyecto es el objetivo número 9,  Industria, Innovación e Infraestructura, ya que los valores de esta ODS se alinean perfectamente con los de nuestro proyecto. Este objetivo tiene como enfoque la construcción de infraestructuras resilientes en forma de rutas adaptables que se basan en las necesidades, la industrialización sostenible en forma de la minimización de kilómetros recorridos y por lo tanto energía ocupada, e innovación de un sistema ya existente. Otro de los objetivos en los que impactamos positivamente es el número 11, Ciudades y Comunidades Sustentables, ya que reconocemos que el mundo está cada vez más urbanizado, y la sostenibilidad no se puede quedar atrás. El e-commerce está cada vez más presente en las vidas de la gente, y al minimizar los efectos negativos de esta industria es el mejor paso que podemos tomar para un futuro verde. 
+        Igual que encontrar la ruta más eficiente para la empresa, buscamos tener un impacto social por esta razón reconocemos la importancia que tiene que la innovación trascienda los objetivos personales, así como a los objetivos colectivos. Por eso mismo, tenemos la intención de tener un impacto positivo en los Objetivos de Desarrollo Sostenible propuestos por la ONU. 
+        
+        Una de las ODS implementadas en el proyecto es el objetivo número 9,  Industria, Innovación e Infraestructura, ya que los valores de esta ODS se alinean perfectamente con los de nuestro proyecto. Este objetivo tiene como enfoque la construcción de infraestructuras resilientes en forma de rutas adaptables que se basan en las necesidades, la industrialización sostenible en forma de la minimización de kilómetros recorridos y por lo tanto energía ocupada, e innovación de un sistema ya existente. 
+        
+        Otro de los objetivos en los que impactamos positivamente es el número 11, Ciudades y Comunidades Sustentables, ya que reconocemos que el mundo está cada vez más urbanizado, y la sostenibilidad no se puede quedar atrás. El e-commerce está cada vez más presente en las vidas de la gente, y al minimizar los efectos negativos de esta industria es el mejor paso que podemos tomar para un futuro verde. 
 
     \section{Conclusiones}    
         
@@ -221,7 +224,7 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
     
     \section{Código fuente}\label{code}
     
-        El código generado puede ser consultado \href{https://github.com/JuanEcheagaray75/Coppel-vrp-tsp}{aquí}
+        El código generado puede ser consultado \href{https://github.com/JuanEcheagaray75/capacitated-vrp}{aquí}
     
     \bibliographystyle{IEEEtran}
     \bibliography{references.bib}
