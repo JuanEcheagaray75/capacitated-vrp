@@ -2,7 +2,10 @@
 
 # Capacitated Vehicle Routing Problem
 
+## Table of contents
+
 - [Capacitated Vehicle Routing Problem](#capacitated-vehicle-routing-problem)
+  - [Table of contents](#table-of-contents)
   - [Databases](#databases)
   - [Data cleaning](#data-cleaning)
     - [Geo-coding addresses](#geo-coding-addresses)
