@@ -35,38 +35,56 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
     \end{abstract}
 
     \begin{IEEEkeywords} 
-        CVRP, Programación Entera, Rutas, Metaheurísticos
+        CVRP, Programación Entera, Metaheurísticos, Open Source Software
     \end{IEEEkeywords}
 
-    \section{Introducción} % Abstract expandido
+    \section{Introducción} \label{sec:intro} % Abstract expandido, tiene que incluir como está repartido el escrito
 
         \subsection{Introducción al E-Commerce}
         
             El comercio electrónico, e-commerce, consiste en realizar transacciones por medios digitales, e incluye distribución, venta, compra, marketing y suministro de información de productos o servicios \cite{visand}. Al buscar las empresas más exitosas, hay muy pocas que no integran el e-commerce como parte integral de su modelo. Le da a las empresas la posibilidad de crear una economía de plataforma \cite{dekker-supremacy} en la que pueden mantener un número relativamente bajo de empleados, cosa que es conveniente para las empresas. Es un mercado que no muestra indicaciones de frenar su crecimiento. De acuerdo a los datos de Stephanie Chevalier en Statista, del 2014 al 2021, las ventas de e-commerce han subido de 1,336 a 4,938 billones de dólares. Uno de los culpables de este crecimiento es lo cómodo que es para el cliente dar un click y recibir lo que quiere en la puerta de su casa. Por medio del e-comercio, el cliente puede observar todos los productos disponibles, ordenar lo que quiera desde la comodidad de su hogar, y simplemente esperar el tiempo de llegada. Para que esto se lleve a cabo de la mejor manera, se debe diseñar una política de reparto eficiente.
+
+    \section{Trabajo relacionado} \label{sec:related-work}
     
-        \subsection{Trabajo relacionado}
+        El \emph{Travelling Salesman Problem}, conocido como \emph{Problema del Agente Viajero} en español, es un problema que se encarga de buscar la ruta más corta y eficiente para llegar a un destino. Esta se basa en que existen múltiples opciones de llegar a un mismo destino, pero enfocándose en reducir costos de transporte, por lo que obtenemos de solución la ruta más corta \cite{trevelingProb}.
+
+        Para ésta problemática se tiene contemplado que entre más destinos haya automáticamente el nivel de complejidad para el cálculo de la solución óptima aumenta. Por esta razón TSP es clasificado como un problema de NP-Hard, de acuerdo con la teoría de la complejidad computacional \cite{trevelingProb}.
+
+        Para la solución de este problema existen diferentes métodos debido a la popularidad y complejidad que tiene, estos son algunos de ellos:
         
-            El \emph{Travelling Salesman Problem}, conocido como \emph{Problema del Agente Viajero} en español, es un problema que se encarga de buscar la ruta más corta y eficiente para llegar a un destino. Esta se basa en que existen múltiples opciones de llegar a un mismo destino, pero enfocándose en reducir costos de transporte, por lo que obtenemos de solución la ruta más corta \cite{trevelingProb}.
-    
-            Para ésta problemática se tiene contemplado que entre más destinos haya automáticamente el nivel de complejidad para el cálculo de la solución óptima aumenta. Por esta razón TSP es clasificado como un problema de NP-Hard, de acuerdo con la teoría de la complejidad computacional \cite{trevelingProb}.
-    
-            Para la solución de este problema existen diferentes métodos debido a la popularidad y complejidad que tiene, estos son algunos de ellos:
-            
-            \subsubsection{Vecino más cercano}
-            
-                También conocido como KNN, este es uno de los algoritmos más simples para resolver este problema. Se trata de un método de aprendizaje automático básico aplicado para la logística de transporte, en este caso, el conductor -o agente viajero- siempre comienza su recorrido con el destino más cercano. Aunque para este método la solución encontrada no siempre logra la optimización \cite{trevelingProb}.
-    
-            \subsubsection{Ramificación y atadura}
-            
-                El método Branch and Bound es un algoritmo complejo diseñado para solucionar problemas que cuentan con variables de decisión enteras; para este método, el problema se divide en múltiples sub-problemas donde cada uno de estos tiene varias soluciones posibles. Se debe destacar que al seleccionar una solución, esta puede afectar en las posibles soluciones de sub-problemas posteriores, ya que como su nombre lo indica, actúa de manera ramificada. Este método se aplica como solución del problema del vendedor viajero \cite{trevelingProb}.
-    
-            \subsubsection{Fuerza bruta}
-            
-                Consiste en la enumeración sistemática de todas las posibles rutas de distribución, se calcula y compara todas las posibles soluciones revisando cuál o cuáles de ellas cumplen mejor a los objetivos de la empresa. Esto con el fin de establecer una única solución, que para el caso de este problema, sería la más corta y por ende la óptima \cite{trevelingProb}.
+        \subsubsection{Vecino más cercano}
+        
+            También conocido como KNN, este es uno de los algoritmos más simples para resolver este problema. Se trata de un método de aprendizaje automático básico aplicado para la logística de transporte, en este caso, el conductor -o agente viajero- siempre comienza su recorrido con el destino más cercano. Aunque para este método la solución encontrada no siempre logra la optimización \cite{trevelingProb}.
+
+        \subsubsection{Ramificación y atadura}
+        
+            El método Branch and Bound es un algoritmo complejo diseñado para solucionar problemas que cuentan con variables de decisión enteras; para este método, el problema se divide en múltiples sub-problemas donde cada uno de estos tiene varias soluciones posibles. Se debe destacar que al seleccionar una solución, esta puede afectar en las posibles soluciones de sub-problemas posteriores, ya que como su nombre lo indica, actúa de manera ramificada. Este método se aplica como solución del problema del vendedor viajero \cite{trevelingProb}.
+
+        \subsubsection{Fuerza bruta}
+        
+            Consiste en la enumeración sistemática de todas las posibles rutas de distribución, se calcula y compara todas las posibles soluciones revisando cuál o cuáles de ellas cumplen mejor a los objetivos de la empresa. Esto con el fin de establecer una única solución, que para el caso de este problema, sería la más corta y por ende la óptima \cite{trevelingProb}.
     
     \section{Objeto de estudio}
 
+        Nuestra implementación se enfoca en resolver el VRP básico, conocido como CVRP (\emph{Capacitated Vehicle Routing Problem}); en este se busca encontrar un conjunto de rutas para una flotilla de vehículos que tenga el menor costo de ruta en el que se realicen todas las entregas necesarias. Cada uno de los vehículos de la flotilla sale del mismo centro de distribución, y al final de su ruta debe de regresar a este.
+
+        Los vehículos solamente realizarán entregas a los clientes de la empresa, es decir, no habrá etapa alguna de carga de paquetes más que en el centro de distribución; aunado a esto, cada uno de los clientes se visitará una sola vez, esto hace referencia a que si uno de los clientes ordenó más de un producto, se entregarán todas sus ordenes en el momento en que sea visitado.
+
+        No se toma en cuenta un límite de distancia recorrida por vehículo ni tampoco se consideran ventanas de tiempo para realizar las entregas. Finalmente, se considera que el entorno de trabajo es determinista, no se modela de forma estocástica el tiempo de ruta entre 2 puntos, ni existe aleatoriedad en las demandas de los clientes.
+        % - Se enfoca en el VRP con restricciones de capacidad
+        % - Solamente se realizan entregas, no se recogen objetos
+        % - Entorno determinista
+        %     - No se toma en cuenta el tráfico
+        % - No hay límites de distancia recorrida por vehículo
+        % - Solamente existe un centro de distribución
+        % - No se establece un límite de horario
+
     \section{Objetivos}
+
+        % - Encontrar una solución cercana al óptimo al CVRP
+        %     - Encontrar un conjunto de n rutas (n = número de vehículos) que realicen todas las entregas de la empresa en 1 daría
+        %     - Rutas que minimicen la distancia total recorrida
+        %     - Respetar los límites de capacidad de cada vehículo
 
     \section{Hipótesis} \label{sec:hyp}
             
@@ -122,7 +140,7 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
             \item Cada camión solamente puede entrar 1 vez a un punto
             \item Todos los vehículos salen del CEDIS
             \item Límite a la capacidad de carga máxima del vehículo
-            \item Las últimas 2 restricciones eliminan los \emph{subtours}
+            \item Las últimas 2 restricciones eliminan los \emph{sub-tours}
         \end{enumerate}
         
         Para la problemática actual, estamos planeando realizar 192 entregas ($n$), se dispondrán de 9 vehículos $(V)$, cada uno de ellos tendrá una capacidad máxima de carga de 18 $m^3$ ($Q$). Los valores numéricos para las demandas y distancias son calculados dentro de la aplicación.
@@ -192,7 +210,7 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
             \label{rutas}
         \end{table}
         
-    \section{Discusión} \label{discusion}
+    \section{Discusión de resultados} \label{discusion}
         
         A pesar de que el producto que hemos desarrollado ya es funcional, hemos encontrado algunas áreas de oportunidad que de ser resueltas incrementarían aún más el valor de la aplicación:
         
