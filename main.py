@@ -54,7 +54,7 @@ if __name__ == '__main__':
     load_per_car = [round(load, 2) for load in load_per_car]
     dead_volume = [round(18 - i, 2) for i in load_per_car]
     gas = [round(i / mileage, 2) for i in distance_per_car]
-    carbon_footprint = [round(i * 2.3) for i in gas]
+    carbon_footprint = [round(i * 2.3, 3) for i in gas]
 
     df = pd.DataFrame(list(zip(n_clients, distance_per_car, load_per_car, dead_volume, gas, carbon_footprint)), 
         columns=['N', 'Distancia (km)', 'Carga (m3)', 'Vol. muerto (m3)', 'Gas (l)', 'CO2 (Kg)'])
@@ -65,10 +65,10 @@ if __name__ == '__main__':
     ----------------------
     Minimal distance: {all_distances.min():.2f} km
     Mean distance: {all_distances.mean():.2f} km
-    Maximal distance: {all_distances.max()} km
-    Standard deviation: {all_distances.std()} km
-    Variance distance: {all_distances.var()} km
-    Carbon footprint: {sum(carbon_footprint)} kg
+    Maximal distance: {all_distances.max():.2f} km
+    Standard deviation: {all_distances.std():.2f} km
+    Variance distance: {all_distances.var():.2f} km
+    Carbon footprint: {sum(carbon_footprint):.2f} kg
     ----------------------''')
 
 
