@@ -1,3 +1,4 @@
+from math import dist
 from src.solver import solver, visualize_routes
 import numpy as np
 import pandas as pd
@@ -43,23 +44,32 @@ def test(n: int):
     
     n_clients = [len(i) - 1 for i in best_route]
     
-    return best_route, distances.min(), n_clients, best_distances, best_loads
+    return distances, best_route, distances.min(), n_clients, best_distances, best_loads
 
 
 if __name__ == '__main__':
-    best_route, distance, n_clients, distance_per_car, load_per_car = test(10)
-    dead_volume = [18 - i for i in load_per_car]
-    print(f'''
-    ----------------------
-    Minimal distance: {distance / 100} km''')
+    max_load = 18
+    mileage = 9.52
+    all_distances, best_route, distance, n_clients, distance_per_car, load_per_car = test(10)
+    load_per_car = [round(load, 2) for load in load_per_car]
+    dead_volume = [round(18 - i, 2) for i in load_per_car]
+    gas = [round(i / mileage, 2) for i in distance_per_car]
+    carbon_footprint = [round(i * 2.3) for i in gas]
 
-    df = pd.DataFrame(list(zip(n_clients, distance_per_car, load_per_car, dead_volume)), 
-        columns=['n_clients', 'distance (km)', 'load (m3)', 'wasted vol (m3)'])
+    df = pd.DataFrame(list(zip(n_clients, distance_per_car, load_per_car, dead_volume, gas, carbon_footprint)), 
+        columns=['N', 'Distancia (km)', 'Carga (m3)', 'Vol. muerto (m3)', 'Gas (l)', 'CO2 (Kg)'])
     df.to_csv('data/processed/best_route.csv', index=False)
 
+    all_distances = np.array(all_distances) / 100
     print(f'''
-    Summary:
-    {df}''')
+    ----------------------
+    Minimal distance: {all_distances.min():.2f} km
+    Mean distance: {all_distances.mean():.2f} km
+    Maximal distance: {all_distances.max()} km
+    Standard deviation: {all_distances.std()} km
+    Variance distance: {all_distances.var()} km
+    Carbon footprint: {sum(carbon_footprint)} kg
+    ----------------------''')
 
 
     visualize_routes(best_route)
