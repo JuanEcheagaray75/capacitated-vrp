@@ -24,7 +24,7 @@ def get_coords(sample_size: float):
     test_data[['latitude', 'longitude', 'altitude']] = pd.DataFrame(test_data['point'].tolist(), index=test_data.index)
 
     test_data.to_csv('data/processed/deliveries-by-address-with-coords.csv', index=False)
-    print(f'Proccessed {len(test_data)} addresses')
+    print(f'Processed {len(test_data)} addresses')
 
 
 def get_distance_matrix():
@@ -59,7 +59,7 @@ if __name__ == '__main__':
         get_coords(sample_size)
         print('Done!')
     
-    elif input('Addresses have been geocoded. Do you want to overwrite the file? (y/n) ') == 'y':
+    elif input('Addresses have been geo-coded. Do you want to overwrite the file? (y/n) ') == 'y':
         print('Getting coordinates...')
         get_coords(sample_size)
     
