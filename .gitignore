@@ -7,6 +7,7 @@ data/*
 data/processed/*
 !data/processed/best_route.csv
 !data/processed/time-vs-distance.csv
+!data/processed/results-analysis.csv
 
 # Maps
 *.html
