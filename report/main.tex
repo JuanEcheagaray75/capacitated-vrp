@@ -261,13 +261,31 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
             El límite de tiempo máximo impuesto al proceso de optimización en nuestra aplicación está ligado al número máximo de cálculos por segundo del equipo usado; en caso de que nuestro sistema sea implementado en un ordenador con un mayor poder de cómputo, el tiempo necesario para encontrar una solución óptima se vería reducido.
 
         \subsection{Tiempo de cómputo}
-            Tiempos promedios:
-            - Limpieza de datos: 7.7 segundos
-            - Proceso de optimización: 42.3 segundos
-            - Proceso de limpieza y geo-codificación de domicilios: 12 minutos 57 segundos
-            - Despliegue de mapa: 1.18 segundos
+
+            El proceso de la aplicación podría ser condensado a 4 etapas, limpieza de datos, geo-codificación de domicilios y cálculo de matriz de distancias, optimización y despliegue de resultados. Se han realizado 10 simulaciones de las que se calculó el tiempo promedio de ejecución, dichos resultados se presentan en la tabla \ref{table:execution-times}:
+
+            \begin{table}[h!]
+                \centering
+                \begin{tabular}{ ||c|c|| }
+                    \hline
+                    Proceso & Tiempo (s) \\
+                    \hline
+                    Limpieza de datos & 7.7 \\
+                    \hline
+                    Geo-codificación y matriz de distancias & 777 \\
+                    \hline
+                    Optimización & 42.3 \\
+                    \hline
+                    Despliegue de rutas & 1.18 \\
+                    \hline
+                \end{tabular}
+                \caption{Tiempos de cómputo de cada proceso}
+                \label{table:execution-times}
+            \end{table}
+
+            El tiempo total de ejecución es de 13 minutos con 48 segundos, tiempo del cual el proceso de geo-codificación representa el 93.8\% de la operación completa. Pensamos que el uso de un software más avanzado podría reducir drásticamente este tiempo de ejecución. Sin embargo, hay que destacar que el tiempo de geo-codificación puede ser mitigado con una base de datos en la que se lleve un registro de los domicilios de los clientes en conjunto con sus coordenadas asociadas.
         
-    \section{ODS}
+    \section{ODS} \label{sec:ods}
     
         Igual que encontrar la ruta más eficiente para la empresa, buscamos tener un impacto social por esta razón reconocemos la importancia que tiene que la innovación trascienda los objetivos personales, así como a los objetivos colectivos. Por eso mismo, tenemos la intención de tener un impacto positivo en los Objetivos de Desarrollo Sostenible propuestos por la ONU \cite{united-nations-2015}. 
         
@@ -275,13 +293,13 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
         
         Otro de los objetivos en los que impactamos positivamente es el número 11, Ciudades y Comunidades Sustentables, ya que reconocemos que el mundo está cada vez más urbanizado, y la sostenibilidad no se puede quedar atrás. El e-commerce está cada vez más presente en las vidas de la gente, y al minimizar los efectos negativos de esta industria es el mejor paso que podemos tomar para un futuro verde. 
 
-    \section{Recursos utilizados}
+    \section{Recursos utilizados} \label{sec:resources}
         
         La implementación propuesta fue corrida en una máquina virtual de sistema operativo Ubuntu 20.04.3 LTS (Focal Fossa). El equipo disponía de un procesador Intel(R) Core(TM) i5-1035G1 CPU @ 1.00GHz, tenía disponible 8 GB de RAM.
 
         Especificaciones sobre los paquetes usados pueden ser encontrados en la documentación de nuestro repositorio \ref{code:repo}.
 
-    \section{Conclusiones}    
+    \section{Conclusiones} \label{sec:conclusions}
         
         El ruteo de vehículos sigue siendo uno de los retos más relevantes para la Investigación de Operaciones, el diseño de algoritmos eficientes que logren encontrar rutas de entrega óptimas con cantidades cada vez más grandes de puntos de entrega es un imperativo para cualquier departamento de logística.
         
