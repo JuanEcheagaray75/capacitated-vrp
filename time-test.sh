@@ -1,1 +1,1 @@
-time source run.sh
+time for i in {1..10}; do source run.sh; done
