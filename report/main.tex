@@ -10,8 +10,12 @@
 \usepackage{hyperref}
 \usepackage{float}
 \usepackage{csvsimple}
+\usepackage[justification=centering]{caption}
 \usepackage{atbegshi} % erase first blank page
 \AtBeginDocument{\AtBeginShipoutNext{\AtBeginShipoutDiscard}}
+
+% Ajustes de paquetes
+
 
 \title{\LARGE \bf Ruteo de entrega de productos para una empresa de e-commerce}
 
@@ -137,26 +141,21 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
 
     \section{Hipótesis} \label{sec:hyp}
             
-        Proponemos una implementación que es capaz de obtener resultados cercanos a la solución óptima en tiempos aceptables con un costo computacional bajo, en relación a otras implementaciones.
-        
-    \section{Puntos de entrega}
-        
-        Haciendo uso de Python y de la librería \emph{Folium} hemos visualizado una muestra de los últimos pedidos registrados en la base de datos, Fig \ref{puntos-entrega-mapa}; cada punto azul representa un cliente, y el punto negro dentro del mapa es donde se encuentra el CEDIS.
-        
-        \begin{figure}[!ht]
-            \centering
-            \includegraphics[scale=0.3]{img/deliveries-plot.pdf}
-            \caption{Puntos de entrega} 
-            \label{puntos-entrega-mapa}
-        \end{figure}
+        Proponemos una implementación que es capaz de obtener resultados cercanos a la solución óptima en tiempos aceptables con un costo computacional bajo, en relación a otras implementaciones. 
     
-    \section{Metodología}
+    \section{Metodología} \label{sec:method}
+
+        Se realizará una limpieza de las bases de datos proporcionadas por medio de un lenguaje de programación; con estas se determinarán las entregas a hacer en 1 día y se obtendrán los domicilios de los clientes, estos serán después geo-codificados para calcular una matriz de distancias todos contra todos.
+
+        En conjunto con la matriz de distancias y el volumen de los pedidos de cada cliente se realizará un proceso de optimización con un \emph{solver} de libre distribución. Finalmente se desplegará un reporte con el conjunto de rutas encontradas en un mapa en adición a datos generales de la solución propuesta, tales como el volumen muerto y el consumo de gasolina.
+
+    \section{Propuesta metodológica} \label{sec:prop-method}
     
         Para la solución de esta problemática hemos usado el lenguaje de programación Python; para los procesos de lectura, limpieza, exploración y agregación de datos hemos usado la librería \emph{pandas} en conjunto con \emph{matplotlib} y \emph{seaborn}, para la solución del problema de programación lineal usamos la librería \emph{ortools} de Google, y para la visualización de los rutas generadas hemos usado \emph{folium}. Una liga al código fuente que hemos desarrollado se encuentra en el apéndice \ref{code:repo}.
         
         \subsection{Limpieza de la base de datos} \label{stage 1}
             
-            Hemos recibido 4 bases de datos. Una conteniendo las direcciones de los centros de distribución de la emppresa en México, un archivo que contiene un listado de todos los productos que vende la empresa más algunas de sus propiedades, en particular nos interesa el volumen de cada artículo. Disponemos también de un archivo que contiene todos los tipos de vehículos que la empresa usa para realizar las entregas, y una base de datos que contiene un listado de las entregas que se deben de realizar.
+            Hemos recibido 4 bases de datos. Una conteniendo las direcciones de los centros de distribución de la empresa, un archivo que contiene un listado de todos los productos que vende más algunas de sus propiedades, en particular nos interesa el volumen de cada artículo. Disponemos también de un archivo que contiene todos los tipos de vehículos que la empresa usa para realizar las entregas, y una base de datos que contiene un listado de las entregas que se deben de realizar.
             
         \subsection{Procesamiento de domicilios} \label{stage 2}
         
@@ -173,33 +172,75 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
         \subsection{Visualización de rutas} 
             
             La visualización de rutas se realizó con la API de la librería \emph{folium}, con ella hemos generado un mapa de Monterrey en la que se visualizan las rutas que siguen todos los vehículos; el mapa también despliega información del domicilio al que se realiza la entrega, y el volumen total de los productos que debe de recibir.
+        
+        \subsection{Resumen de resultados}
+
+            Del resultado de generación de rutas se despliega también un tabulado en el que se concentran métricas para cada uno de los vehículos de la flotilla, el tabulado contiene información como:
+            \begin{enumerate}
+                \item Número de clientes visitados
+                \item Distancia total recorrida en $km$
+                \item Carga del vehículo en $m^{3}$
+                \item Volumen muerto en $m^{3}$
+                \item Gasolina consumida en $l$
+            \end{enumerate}
+
+            Dada la instancia de VRP que intentamos resolver, suponemos que la flotilla es homogénea; es decir, todos los vehículos tienen la misma capacidad de carga y tienen el mismo rendimiento de combustible. Es por esto que podemos calcular un consumo de gasolina y una huella de carbono.
             
     \section{Experimentación y resultados}
     
         La red con la que tratamos consta de 193 nodos, 192 referentes a los clientes, y 1 nodo más para el Centro de Distribución. El número de conexiones (aristas) dentro del grafo es $193\choose2$ = $18528$
-    
-        Después de correr la aplicación, se desplegará el navegador el conjunto de rutas de todos los vehículos, en la figura \ref{generated-routes} podemos ver 2 de las rutas encontradas.
-    
-        \begin{figure}[H]
-            \centering
-            \includegraphics[scale=0.3]{img/rutas-generadas.png}
-            \caption{Ejemplo de rutas generadas} 
-            \label{generated-routes}
-        \end{figure}
         
-        Como se puede apreciar en la tabla \ref{rutas}, para esta simulación, la aplicación encontró un conjunto de rutas que minimizan la distancia que recorren los camiones en total hasta 483.49 km. En las mejores corridas la ruta más corta que realiza un camión es de 32 km, y la más larga de 97.02 km.
+        Dada la complejidad computacional de resolver de forma exacta un VRP con 193 nodos, deben de utilizarse heurísticos en el proceso de solución. La librería \emph{ortools} le permite al usuario seleccionar 1 heurístico para la obtención de una solución inicial a mejorar, y 1 meta-heurístico para realizar el proceso de optimización. Es también decisión del desarrollador imponer un límite al tiempo de ejecución del que dispone el algoritmo, este parámetro también deberá ser optimizado en base a los resultados generados.
+
+        Para obtener una solución básica inicial hemos optado por utilizar un algoritmo de naturaleza voraz que selecciona como siguiente nodo a visitar a aquel con el menor costo de ruta asociado; este proceso se repite para cada uno de los vehículos de la flotilla. Como metaheurístico hemos seleccionado una búsqueda local guiada, que de acuerdo a la documentación de la librería \cite{google-2021} suele ser la mejor opción para resolver problemas de ruteo de vehículos.
+
+        \subsection{Ajuste de parámetros} \label{sec:parameter-tuning}
+            
+            Para determinar cuál es el mejor tiempo límite se obtuvieron 10 muestras de resultados para tiempos máximos de cómputo de entre 1 y 10 segundos. Se recuperó la mejor distancia encontrada, así como la media, el máximo, la desviación estándar y la varianza. En la figura \ref{fig:optim-curves} se presentan las curvas de optimización generadas, se grafica la distancia mínima encontrada, la distancia media y la máxima del conjunto de 10 muestras.
+            \begin{figure}[h!]
+                \centering
+                \includegraphics[scale=0.35]{../img/curvas-opt.png}
+                \caption{Curva de optimización con diferentes tiempos máximos de cómputo}
+                \label{fig:optim-curves}
+            \end{figure}
+
+            También hemos generado una curva para varianza den cada una de las observaciones:
+
+            \begin{figure}[h!]
+                \centering
+                \includegraphics[scale=0.35]{../img/varianza-opt.png}
+                \caption{Varianza de soluciones encontradas para diferentes tiempos máximos de cómputo}
+                \label{fig:optim-var}
+            \end{figure}
+
+            De estas curvas después se utilizó la librería de \emph{Python}, \emph{kneed}. En ella se implementa el algoritmo propuesto por Satopaa en Finding a “Kneedle” in a Haystack: Detecting Knee Points in System Behavior \cite{satopaa2011finding}. En la figura \ref{fig:optim-curves} y en la figura \ref{fig:optim-var} se visualiza el punto encontrado.
+
+            El punto de inflexión de la distancia mínima sugeriría que a partir de 2 segundos esta métrica no cambiará de forma drástica. Sin embargo, en la curva de la varianza este punto se localiza en 4 segundos. Con el fin de asegurar la mayor consistencia, sugerimos que para la generación de rutas se realicen 10 simulaciones con un tiempo máximo de cómputo por simulación de 4 segundos.
+
+        \subsection{Resultados}
+
+            Después de correr la aplicación con los parámetros definidos en \ref{sec:parameter-tuning}, se desplegará el navegador el conjunto de rutas de todos los vehículos, en la figura \ref{fig:generated-routes} podemos ver 2 de las rutas encontradas.
         
-        \begin{table}[h!]
-            \centering
-            \csvreader[tabular = ||c|c|c|c|c||,
-                        table head = \hline N & Distancia $(km)$ & Carga $(m^{3})$ & Vol. muerto $(m^{3})$ & Gas $(l)$ \\ \hline,
-                        late after last line = \\ \hline,
-                        ]{../data/processed/best_route.csv}{}%
-                        {\csvcoli & \csvcolii & \csvcoliii & \csvcoliv & \csvcolv}
-            \caption{Rutas generadas por el programa}
-            \label{rutas}
-        \end{table}
-        
+            \begin{figure}[H]
+                \centering
+                \includegraphics[scale=0.4]{../img/route-examples.png}
+                \caption{Ejemplo de rutas generadas} 
+                \label{fig:generated-routes}
+            \end{figure}
+            
+            Como se puede apreciar en la tabla \ref{rutas}, para esta simulación, la aplicación encontró un conjunto de rutas que minimizan la distancia que recorren los camiones en total hasta 226.79 km. En esta solución el vehículo con la ruta más corta viaja 13.4 $km$ y el que tiene la ruta más larga viaja 42.21 $km$.
+            
+            \begin{table}[h!]
+                \centering
+                \csvreader[tabular = ||c|c|c|c|c||,
+                            table head = \hline N & Distancia $(km)$ & Carga $(m^{3})$ & Vol. muerto $(m^{3})$ & Gas $(l)$ \\ \hline,
+                            late after last line = \\ \hline,
+                            ]{../data/processed/best_route.csv}{}%
+                            {\csvcoli & \csvcolii & \csvcoliii & \csvcoliv & \csvcolv}
+                \caption{Rutas generadas por el programa}
+                \label{rutas}
+            \end{table}
+            
     \section{Discusión de resultados} \label{discusion}
         
         A pesar de que el producto que hemos desarrollado ya es funcional, hemos encontrado algunas áreas de oportunidad que de ser resueltas incrementarían aún más el valor de la aplicación:
