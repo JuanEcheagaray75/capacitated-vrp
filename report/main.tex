@@ -228,15 +228,16 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
                 \label{fig:generated-routes}
             \end{figure}
             
-            Como se puede apreciar en la tabla \ref{rutas}, para esta simulación, la aplicación encontró un conjunto de rutas que minimizan la distancia que recorren los camiones en total hasta 226.79 km. En esta solución el vehículo con la ruta más corta viaja 13.4 $km$ y el que tiene la ruta más larga viaja 42.21 $km$.
+            Como se puede apreciar en la tabla \ref{rutas}, para esta simulación, la aplicación encontró un conjunto de rutas que minimizan la distancia que recorren los camiones en total hasta 226.79 km. En esta solución el vehículo con la ruta más corta viaja 12.86 $km$ y el que tiene la ruta más larga viaja 42.21 $km$, se tiene una huella de carbono de 55 km de $CO_2$.
             
             \begin{table}[h!]
                 \centering
-                \csvreader[tabular = ||c|c|c|c|c||,
-                            table head = \hline N & Distancia $(km)$ & Carga $(m^{3})$ & Vol. muerto $(m^{3})$ & Gas $(l)$ \\ \hline,
+                \scalebox{0.8}{
+                \csvreader[tabular = ||c|c|c|c|c|c||,
+                            table head = \hline N & Distancia $(km)$ & Carga $(m^{3})$ & Vol. muerto $(m^{3})$ & Gas $(l)$ & Huella $CO_2$ \\ \hline,
                             late after last line = \\ \hline,
                             ]{../data/processed/best_route.csv}{}%
-                            {\csvcoli & \csvcolii & \csvcoliii & \csvcoliv & \csvcolv}
+                            {\csvcoli & \csvcolii & \csvcoliii & \csvcoliv & \csvcolv & \csvcolvi}}
                 \caption{Rutas generadas por el programa}
                 \label{rutas}
             \end{table}
@@ -252,6 +253,10 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
         \subsection{Cálculo de distancia entre 2 puntos}
             
             La aplicación utiliza como métrica de distancia la distancia geodésica, que está relativamente lejos de ser una aproximación rigurosa para determinar la distancia entre 2 puntos. Sugerimos también que se adquiera una licencia comercial que calcule esta distancia. Su uso le daría una mayor validez a los resultados que encontramos.
+        
+        \subsection{Variabilidad de resultados}
+
+            El límite de tiempo máximo impuesto en nuestra aplicación está ligado al número máximo de cálculos por segundo del equipo usado; en caso de que nuestro sistema sea implementado en un ordenador con un mayor poder de cómputo, el tiempo necesario para encontrar una solución óptima se vería reducido.
         
     \section{ODS}
     
