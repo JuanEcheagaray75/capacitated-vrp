@@ -43,3 +43,6 @@ data/processed/*
 *.fdb_latexmk
 *.bcf
 *.xml
+
+# Markdown
+ideas.md
