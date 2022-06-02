@@ -9,16 +9,16 @@
 
 ## Report
 
-- [ ] Table of results
+- [x] Table of results
   - [x] Time of execution $\propto$ `search_parameters.time_limit.FromSeconds(t)`
     - [x] Better idea to create a graph that compares found optimal distance vs said time
   - [x] Wasted volume per vehicle
   - [x] Traveled distance per vehicle
   - [x] Load per vehicle
-  - [ ] Carbon footprint
-  - [ ] Table of results for justifying max execution time
-    - [ ] Calculate average
-    - [ ] Calculate variance
+  - [x] Carbon footprint
+  - [x] Table of results for justifying max execution time
+    - [x] Calculate average
+    - [x] Calculate variance
 - [x] Properly define the study case
   - [x] Focus on the entire city
   - [x] Not using traffic
@@ -32,11 +32,11 @@
   - [x] Detailed objectives
 - [x] Establish an hypothesis (null vs alternative)
 - [x] Do not work on the infrastructure, not needed for our case
-- [ ] State resources used
-  - [ ] Computational resources
+- [x] State resources used
+  - [x] Computational resources
   - [x] Description of the generated network
 - [ ] Results
-  - [ ] Map
+  - [x] Map
   - [ ] Dashboard
 
 ### For the flex
