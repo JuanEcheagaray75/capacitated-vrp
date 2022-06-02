@@ -19,7 +19,7 @@
 
 \title{\LARGE \bf Ruteo de entrega de productos para una empresa de e-commerce}
 
-\author{Verónica Victoria García De la Fuente, Emily Rebeca Méndez Cruz, \\Carolina Longoria Lozano, Juan Pablo Echeagaray González \\
+\author{Juan Pablo Echeagaray González, Emily Rebeca Méndez Cruz, \\Carolina Longoria Lozano, Verónica Victoria García De la Fuente \\
 Optimización determinista \\
 MA2001B.200 \\
 Dr. Fernando Elizalde Ramírez \\
@@ -35,7 +35,7 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
     \pagestyle{empty}
 
     \begin{abstract}
-        Una empresa de e-commerce ha solicitado que alumnos del Tecnológico de Monterrey diseñen un programa de rutas para la entrega de los productos adquiridos por sus clientes en su tienda \emph{online}. Con las bases de datos recibidas se formuló un modelo de CVRP, este modelo fue embebido y optimizado para minimizar las distancias recorridas por los camiones de entrega. El producto final despliega un reporte de las rutas así como una visualización de estas.
+        Una empresa de e-commerce ha solicitado que alumnos del Tecnológico de Monterrey diseñen un programa de rutas para la entrega de los productos adquiridos por sus clientes en su tienda \texttt{online}. Con las bases de datos recibidas se formuló un modelo de CVRP, este modelo fue embebido y optimizado para minimizar las distancias recorridas por los camiones de entrega. El producto final despliega un reporte de las rutas así como una visualización de estas.
     \end{abstract}
 
     \begin{IEEEkeywords} 
@@ -109,7 +109,9 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
         
         Para la problemática actual, estamos planeando realizar 192 entregas ($n$), se dispondrán de 9 vehículos $(V)$, cada uno de ellos tendrá una capacidad máxima de carga de 18 $m^3$ ($Q$). Los valores numéricos para las demandas y distancias son calculados dentro de la aplicación.
         
-        El heurístico que usamos en nuestro modelo es el costo asociado de ir de un punto de la ciudad a otro. No estamos modelando la distancia que hay entre cada punto como la distancia manejando, sino que estamos usando la distancia geodésica que hay entre cada punto, una gran desventaja del uso de este heurístico es que puede generar rutas aparentemente óptimas pero que no son factibles cuando se agregan las posibles maneras de conectar los puntos de entrega. Hemos decidido seguir adelante con este heurístico ya que hay varios proyectos reconocidos que usan este heurístico para resolver problemas de ruteo de vehículos \cite{ERDOGAN201762}.
+        El heurístico que usamos en nuestro modelo es el costo asociado de ir de un punto de la ciudad a otro, en nuestro modelo la distancia entre 2 puntos de entrega funge ese papel. No estamos modelando la distancia que hay entre cada punto como la distancia manejando, sino que estamos usando la distancia geodésica que hay entre cada punto, una de las principales virtudes de este heurístico es la sencillez con la que puede ser calculado y tampoco se requiere requerir a software comercial para obtenerse. 
+        
+        Hemos decidido seguir adelante con este heurístico ya que hay varios proyectos reconocidos que lo usan para resolver problemas de ruteo de vehículos \cite{ERDOGAN201762}.
 
     \section{Justificación} \label{sec:justification}
 
@@ -135,23 +137,23 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
         
             Consiste en la enumeración sistemática de todas las posibles rutas de distribución, se calcula y compara todas las posibles soluciones revisando cuál o cuáles de ellas cumplen mejor a los objetivos de la empresa. Esto con el fin de establecer una única solución, que para el caso de este problema, sería la más corta y por ende la óptima \cite{trevelingProb}.
     
-    \section{Objetivos}
+    \section{Objetivos} \label{sec:objectives}
 
-        El objetivo principal de nuestro trabajo es generar una metodología para resolver el problema de generación de rutas de entrega para una empresa de e-commerce que se acerque a la optimalidad. De forma específica, se desea encontrar un conjunto de n rutas que realicen todas las entregas de 1 día para la empresa, estas rutas deben de minimizar la distancia total recorrida así como respetar la capacidad máxima de carga de cada uno de los vehículos.
+        El objetivo principal de nuestro trabajo es generar una metodología para resolver el problema de generación de rutas de entrega para una empresa de e-commerce que se acerque a la optimalidad. De forma específica, se desea encontrar un conjunto de $n$ rutas que realicen todas las entregas de 1 día para la empresa, estas rutas deben de minimizar la distancia total recorrida así como respetar las diversas restricciones propias del problema y de la empresa
 
     \section{Hipótesis} \label{sec:hyp}
             
-        Proponemos una implementación que es capaz de obtener resultados cercanos a la solución óptima en tiempos aceptables con un costo computacional bajo, en relación a otras implementaciones. 
+        Proponemos una implementación que es capaz de obtener resultados cercanos a la solución óptima en tiempos aceptables, con un costo computacional bajo, en relación a otras implementaciones. 
     
     \section{Metodología} \label{sec:method}
 
         Se realizará una limpieza de las bases de datos proporcionadas por medio de un lenguaje de programación; con estas se determinarán las entregas a hacer en 1 día y se obtendrán los domicilios de los clientes, estos serán después geo-codificados para calcular una matriz de distancias todos contra todos.
 
-        En conjunto con la matriz de distancias y el volumen de los pedidos de cada cliente se realizará un proceso de optimización con un \emph{solver} de libre distribución. Finalmente se desplegará un reporte con el conjunto de rutas encontradas en un mapa en adición a datos generales de la solución propuesta, tales como el volumen muerto y el consumo de gasolina.
+        En conjunto con la matriz de distancias y el volumen de los pedidos de cada cliente se realizará un proceso de optimización con un \texttt{solver} de libre distribución. Finalmente se desplegará un reporte con el conjunto de rutas encontradas en un mapa en adición a datos generales de la solución propuesta, tales como el volumen muerto y el consumo de gasolina.
 
     \section{Propuesta metodológica} \label{sec:prop-method}
     
-        Para la solución de esta problemática hemos usado el lenguaje de programación Python; para los procesos de lectura, limpieza, exploración y agregación de datos hemos usado la librería \emph{pandas} en conjunto con \emph{matplotlib} y \emph{seaborn}, para la solución del problema de programación lineal usamos la librería \emph{ortools} de Google, y para la visualización de los rutas generadas hemos usado \emph{folium}. Una liga al código fuente que hemos desarrollado se encuentra en el apéndice \ref{code:repo}.
+        Para la solución de esta problemática hemos usado el lenguaje de programación Python; para los procesos de lectura, limpieza, exploración y agregación de datos hemos usado la librería \texttt{pandas} en conjunto con \texttt{matplotlib} y \texttt{seaborn}, para la solución del problema de programación lineal usamos la librería \texttt{ortools} de Google, y para la visualización de los rutas generadas hemos usado \texttt{folium}. Una liga al código fuente que hemos desarrollado se encuentra en el apéndice \ref{code:repo}.
         
         \subsection{Limpieza de la base de datos} \label{stage 1}
             
@@ -159,19 +161,19 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
             
         \subsection{Procesamiento de domicilios} \label{stage 2}
         
-            Para la geo-codificación de los domicilios hemos usado la librería \emph{Photon}, desde el paso anterior hemos creado una columna que contiene todos los datos de referencias de los domicilios de los compradores. El proceso de geo-codificación toma un tiempo promedio de 15 minutos en la máquina que usamos, en promedio se logran codificar 25\% de los domicilios que recibe. Al final de este proceso tenemos las coordenadas asociadas a cada uno de los domicilios.
+            Para la geo-codificación de los domicilios hemos usado la librería \texttt{Photon}, desde el paso anterior hemos creado una columna que contiene todos los datos de referencias de los domicilios de los compradores. El proceso de geo-codificación toma un tiempo promedio de 15 minutos en la máquina que usamos, en promedio se logran codificar 25\% de los domicilios que recibe. Al final de este proceso tenemos las coordenadas asociadas a cada uno de los domicilios.
 
         \subsection{Cálculo de matriz de distancias} \label{stage 3}
             
-            De las coordenadas de cada domicilio calculamos una matriz de distancia todos contra todos, la distancia a usar es la geodésica.
+            De las coordenadas de cada domicilio calculamos una matriz de distancia todos contra todos, la distancia a usar es la geodésica. Como función geodésica hemos usada la implementada en el módulo \texttt{distance} de la librería \texttt{Geopy} usada para el procesamiento de domicilio, y la matriz de distancia se calcula con la misma a través de la función \texttt{cdist} implementada en el sub-módulo \texttt{spatial} de la librería de cómputo científico \texttt{SciPy}.
 
         \subsection{Generación de rutas} \label{stage 4}
         
-            Para la solución del problema hemos usado la librería \emph{ortools} de Google. Hacemos uso de la matriz de distancias calculada en el paso anterior, un listado de cuánto volumen debe de ser entregado a cada uno de los clientes, un número de vehículos a mandar, y su capacidad máxima de carga en metros cúbicos. La solución generada consiste de un listado de las rutas a seguir por cada uno de los vehículos, el volumen total que llevarán, cuál fue la distancia total recorrida por todos los vehículos y cuánta carga llevaron.
+            Para la solución del problema hemos usado la librería \texttt{ortools} de Google. Hacemos uso de la matriz de distancias calculada en el paso anterior, un listado de cuánto volumen debe de ser entregado a cada uno de los clientes, un número de vehículos a mandar, y su capacidad máxima de carga en metros cúbicos. La solución generada consiste de un listado de las rutas a seguir por cada uno de los vehículos, el volumen total que llevarán, cuál fue la distancia total recorrida por todos los vehículos y cuánta carga llevaron.
 
         \subsection{Visualización de rutas} 
             
-            La visualización de rutas se realizó con la API de la librería \emph{folium}, con ella hemos generado un mapa de Monterrey en la que se visualizan las rutas que siguen todos los vehículos; el mapa también despliega información del domicilio al que se realiza la entrega, y el volumen total de los productos que debe de recibir.
+            La visualización de rutas se realizó con la API de la librería \texttt{folium}, con ella hemos generado un mapa de Monterrey en la que se visualizan las rutas que siguen todos los vehículos; el mapa también despliega información del domicilio al que se realiza la entrega, y el volumen total de los productos que debe de recibir.
         
         \subsection{Resumen de resultados}
 
@@ -186,11 +188,11 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
 
             Dada la instancia de VRP que intentamos resolver, suponemos que la flotilla es homogénea; es decir, todos los vehículos tienen la misma capacidad de carga y tienen el mismo rendimiento de combustible. Es por esto que podemos calcular un consumo de gasolina y una huella de carbono.
             
-    \section{Experimentación y resultados}
+    \section{Experimentación y resultados} \label{sec:experimentation}
     
         La red con la que tratamos consta de 193 nodos, 192 referentes a los clientes, y 1 nodo más para el Centro de Distribución. El número de conexiones (aristas) dentro del grafo es $193\choose2$ = $18528$
         
-        Dada la complejidad computacional de resolver de forma exacta un VRP con 193 nodos, deben de utilizarse heurísticos en el proceso de solución. La librería \emph{ortools} le permite al usuario seleccionar 1 heurístico para la obtención de una solución inicial a mejorar, y 1 meta-heurístico para realizar el proceso de optimización. Es también decisión del desarrollador imponer un límite al tiempo de ejecución del que dispone el algoritmo, este parámetro también deberá ser optimizado en base a los resultados generados.
+        Dada la complejidad computacional de resolver de forma exacta un VRP con 193 nodos, deben de utilizarse heurísticos en el proceso de solución. La librería \texttt{ortools} le permite al usuario seleccionar 1 heurístico para la obtención de una solución inicial a mejorar, y 1 meta-heurístico para realizar el proceso de optimización. Es también decisión del desarrollador imponer un límite al tiempo de ejecución del que dispone el algoritmo, este parámetro también deberá ser optimizado en base a los resultados generados.
 
         Para obtener una solución básica inicial hemos optado por utilizar un algoritmo de naturaleza voraz que selecciona como siguiente nodo a visitar a aquel con el menor costo de ruta asociado; este proceso se repite para cada uno de los vehículos de la flotilla. Como metaheurístico hemos seleccionado una búsqueda local guiada, que de acuerdo a la documentación de la librería \cite{google-2021} suele ser la mejor opción para resolver problemas de ruteo de vehículos.
 
@@ -213,11 +215,11 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
                 \label{fig:optim-var}
             \end{figure}
 
-            De estas curvas después se utilizó la librería de \emph{Python}, \emph{kneed}. En ella se implementa el algoritmo propuesto por Satopaa en Finding a “Kneedle” in a Haystack: Detecting Knee Points in System Behavior \cite{satopaa2011finding}. En la figura \ref{fig:optim-curves} y en la figura \ref{fig:optim-var} se visualiza el punto encontrado.
+            De estas curvas después se utilizó la librería de \texttt{Python}, \texttt{kneed}. En ella se implementa el algoritmo propuesto por Satopaa en Finding a “Kneedle” in a Haystack: Detecting Knee Points in System Behavior \cite{satopaa2011finding}. En la figura \ref{fig:optim-curves} y en la figura \ref{fig:optim-var} se visualiza el punto encontrado.
 
             El punto de inflexión de la distancia mínima sugeriría que a partir de 2 segundos esta métrica no cambiará de forma drástica. Sin embargo, en la curva de la varianza este punto se localiza en 4 segundos. Con el fin de asegurar la mayor consistencia, sugerimos que para la generación de rutas se realicen 10 simulaciones con un tiempo máximo de cómputo por simulación de 4 segundos.
 
-        \subsection{Resultados}
+        \subsection{Resultados} \label{sec:results}
 
             Después de correr la aplicación con los parámetros definidos en \ref{sec:parameter-tuning}, se desplegará el navegador el conjunto de rutas de todos los vehículos, en la figura \ref{fig:generated-routes} podemos ver 2 de las rutas encontradas.
         
@@ -242,13 +244,13 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
                 \label{rutas}
             \end{table}
             
-    \section{Discusión de resultados} \label{discusion}
+    \section{Discusión de resultados} \label{sec:discusion}
         
         A pesar de que el producto que hemos desarrollado ya es funcional, hemos encontrado algunas áreas de oportunidad que de ser resueltas incrementarían aún más el valor de la aplicación:
         
         \subsection{Geo-codificación de los domicilios}
             
-            Actualmente la aplicación hace uso de una librería de libre distribución llamada \emph{Photon} para geo-codificar los domicilios disponibles en la base de datos; consideramos que la adquisición de una licencia comercial podría aumentar aún más el número de domicilios que son geo-codificados con éxito.
+            Actualmente la aplicación hace uso de una librería de libre distribución llamada \texttt{Photon} para geo-codificar los domicilios disponibles en la base de datos; consideramos que la adquisición de una licencia comercial podría aumentar aún más el número de domicilios que son geo-codificados con éxito.
             
         \subsection{Cálculo de distancia entre 2 puntos}
             
@@ -256,7 +258,14 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
         
         \subsection{Variabilidad de resultados}
 
-            El límite de tiempo máximo impuesto en nuestra aplicación está ligado al número máximo de cálculos por segundo del equipo usado; en caso de que nuestro sistema sea implementado en un ordenador con un mayor poder de cómputo, el tiempo necesario para encontrar una solución óptima se vería reducido.
+            El límite de tiempo máximo impuesto al proceso de optimización en nuestra aplicación está ligado al número máximo de cálculos por segundo del equipo usado; en caso de que nuestro sistema sea implementado en un ordenador con un mayor poder de cómputo, el tiempo necesario para encontrar una solución óptima se vería reducido.
+
+        \subsection{Tiempo de cómputo}
+            Tiempos promedios:
+            - Limpieza de datos: 7.7 segundos
+            - Proceso de optimización: 42.3 segundos
+            - Proceso de limpieza y geo-codificación de domicilios: 12 minutos 57 segundos
+            - Despliegue de mapa: 1.18 segundos
         
     \section{ODS}
     
