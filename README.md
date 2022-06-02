@@ -78,13 +78,21 @@ As of now, the project is focused on solving a CVRP with 9 vehicles and a maximu
 
 | <img src='img/route-examples.png' width='800'> |
 |:--:|
-| *Example of 2 optimal routes found* |
+| *Figure: Example of 2 optimal routes found* |
 
-To arrive at this result we first needed to determine the right set of hyper-parameters to fetch to the solver. For more details please consult our technical report. One of the most important figures is presented below, it shows the time we allowed each iteration of the solver to run vs the found optimal solution.
+To arrive at this result we first needed to determine the right set of hyper-parameters to fetch to the solver. For more details please consult our technical report. One of the most important figures is presented below, it shows the time we allowed each iteration of the solver to run vs the found optimal solution. We add other 2 curves that represent both the maximal and average distances found during the simulation.
 
-| <img src='img/time-vs-distance.png' width='800'> |
+| <img src='img/curvas-opt.png' width='800'> |
 |:--:|
-| *Optimization curve* |
+| *Figure: Optimization curve* |
+
+Alongside the previous graph, it's important to have a sense of how the solutions vary, we also produced a graph where we plot the solution's variance for each time limit.
+
+| <img src='img/varianza-opt.png' width='800'> |
+|:--:|
+| *Figure: Variance curve* |
+
+As I can guess, you've noted those little stars on each of the afore mentioned graphs, those stars are located at the knee points, those represent a *point of inflection*, big words for saying that after that point the results do not vary that much. Since the knee point of the variance lies at 4 seconds, we designated this time as the optimal time limit for our application.
 
 ## Installation and usage
 
