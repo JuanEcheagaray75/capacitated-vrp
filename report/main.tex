@@ -35,7 +35,7 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
     \pagestyle{empty}
 
     \begin{abstract}
-        Una empresa de e-commerce ha solicitado que alumnos del Tecnológico de Monterrey diseñen un programa de rutas para la entrega de los productos adquiridos por sus clientes en su tienda \texttt{online}. Con las bases de datos recibidas se formuló un modelo de CVRP, este modelo fue embebido y optimizado para minimizar las distancias recorridas por los camiones de entrega. El producto final despliega un reporte de las rutas así como una visualización de estas.
+        Una empresa de e-commerce ha solicitado que alumnos del Tecnológico de Monterrey diseñen un programa de rutas para la entrega de los productos adquiridos por sus clientes en su tienda \emph{online}. Con las bases de datos recibidas se formuló un modelo de CVRP, este modelo fue embebido y optimizado para minimizar las distancias recorridas por los camiones de entrega. El producto final despliega un reporte de las rutas así como una visualización de estas.
     \end{abstract}
 
     \begin{IEEEkeywords} 
@@ -44,7 +44,15 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
 
     \section{Introducción} \label{sec:intro} % Abstract expandido, tiene que incluir como está repartido el escrito
 
-    \section{Contexto general} \label{sec:general-context}
+        Uno de los procesos más importantes para cualquier empresa que tenga un proceso de distribución es el ruteo y asignación de vehículos para satisfacer las demandas de sus clientes. El problema de Ruteo de Vehículos (VRP) se centra en la generación de un conjunto de rutas para su flotilla que minimice el costo total de las entregas, se conocen de antemano las demandas de los clientes, y todos los vehículos de la flotilla deben salir y regresar al mismo centro de distribución; aunado a esto, cada cliente es visitado una sola vez, y a cada vehículo no se le pueden asignar entregas que sobrepasen su capacidad de carga máxima \cite{elshaer2020taxonomic}.
+
+        El VRP ha sido uno de los problemas más estudiados en el campo de la logística; a la fecha se han logrado implementar algoritmos que encuentran soluciones exactas a este problema, sin embargo, estas aproximaciones fallan al ser escaladas a un nivel industrial; las ganancias de tener una solución óptima se ven minimizadas cuando se toma en cuenta el tiempo y poder computacional requerido para obtenerlas. Por esto, es recomendable introducir heurísticos al proceso de optimización, que si bien, no llegarán al conjunto de rutas óptimos, estarán cercanos al mismo.
+
+        Este reporte técnico se organiza de la siguiente manera: en las secciones \ref{sec:case-study} y \ref{sec:problem} se delimita el caso de estudio a resolver y se plantea formalmente la problemática. En las secciones \ref{sec:justification} y \ref{sec:theoretical} presentamos una justificación de nuestro estudio así como técnicas usadas con anterioridad para resolver este problema.
+
+        En las secciones \ref{sec:objectives} y \ref{sec:hyp} se definen los objetivos de nuestra implementación así como la hipótesis a probar. En las secciones \ref{sec:method} y \ref{sec:prop-method} se presenta la metodología seguida; en las secciones \ref{sec:experimentation} y \ref{sec:discusion} presentamos nuestros resultados experimentales y áreas de oportunidad descubiertas, y en las secciones \ref{sec:ods} y \ref{sec:conclusions} presentamos el impacto que tendría nuestra implementación para los Objetivos de Desarrollo Sostenible y conclusiones del estudio.
+
+        En las secciones \ref{sec:resources} y \ref{code:repo} se presentan datos técnicos del equipo utilizado y se proporciona una liga al código fuente implementado.
         
     \section{Objeto de estudio} \label{sec:case-study}
 
