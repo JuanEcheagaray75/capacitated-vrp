@@ -101,7 +101,7 @@ As I can guess, you've noted those little stars on each of the afore mentioned g
 This repo was designed and tested with Python 3.8 running on Ubuntu based on WSL2.
 
 1. Clone the repository to the location of your choosing:
-    - `git clone https://github.com/JuanEcheagaray75/coppel-vrp-tsp.git`
+    - `git clone https://github.com/JuanEcheagaray75/capacitated-vrp.git`
 2. I recommend creating a virtual environment for this project, but feel free to skip this step
     - `python3 -m venv .venv`
 3. Activate the virtual environment:
