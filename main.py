@@ -60,6 +60,10 @@ if __name__ == '__main__':
         columns=['N', 'Distancia (km)', 'Carga (m3)', 'Vol. muerto (m3)', 'Gas (l)', 'CO2 (Kg)'])
     df.to_csv('data/processed/best_route.csv', index=False)
 
+    print(f'''Results:
+    ----------------------
+    {df}''')
+
     all_distances = np.array(all_distances) / 100
     print(f'''
     ----------------------
