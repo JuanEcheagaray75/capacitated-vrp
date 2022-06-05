@@ -120,7 +120,7 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
 
     \section{Justificación} \label{sec:justification}
 
-        Actualmente el e-commerce a crecido un 55\% debido a la pandemia y la tendencia es que se mantenga el número de ventas actual \cite{koetsier-2022}, siendo esto un reto para la logística de entrega, la cual afecta directamente al precio de venta, por lo tanto en los gastos de la empresa viendo reducidas sus utilidades, de ahí la necesidad del desarrollo de nuestro proyecto ya que consistes en generar soluciones de forma rápida a este tipo de problemas beneficiando a la empresa y al cliente, ya que se eficientiza el proceso, se optimizan los recursos y mejora la calidad de servicio hacia el cliente
+        Actualmente el e-commerce ha crecido un 55\% debido a la pandemia y la tendencia es que se mantenga el número de ventas actual \cite{koetsier-2022}, siendo esto un reto para la logística de entrega, la cual afecta directamente al precio de venta, por lo tanto en los gastos de la empresa viendo reducidas sus utilidades, de ahí la necesidad del desarrollo de nuestro proyecto ya que consiste en generar soluciones de forma rápida a este tipo de problemas beneficiando a la empresa y al cliente, ya que se eficientiza el proceso, se optimizan los recursos y mejora la calidad de servicio hacia el cliente.
 
     \section{Marco teórico} \label{sec:theoretical}
     
@@ -144,7 +144,7 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
     
     \section{Objetivos} \label{sec:objectives}
 
-        El objetivo principal de nuestro trabajo es generar una metodología para resolver el problema de generación de rutas de entrega para una empresa de e-commerce que se acerque a la optimalidad. De forma específica, se desea encontrar un conjunto de $n$ rutas que realicen todas las entregas de 1 día para la empresa, estas rutas deben de minimizar la distancia total recorrida así como respetar las diversas restricciones propias del problema y de la empresa.
+        El objetivo principal de nuestro trabajo es generar una metodología para resolver el problema de generación de rutas de entrega para una empresa de e-commerce que se acerque a la optimalidad. De forma específica, se desea encontrar un conjunto de $n$ rutas que realicen todas las entregas de un día para la empresa, estas rutas deben de minimizar la distancia total recorrida así como respetar las diversas restricciones propias del problema y de la empresa.
 
     \section{Hipótesis} \label{sec:hyp}
             
@@ -152,13 +152,13 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
     
     \section{Metodología} \label{sec:method}
 
-        Se realizará una limpieza de las bases de datos proporcionadas por medio de un lenguaje de programación; con estas se determinarán las entregas a hacer en 1 día y se obtendrán los domicilios de los clientes, estos serán después geo-codificados para calcular una matriz de distancias todos contra todos.
+        Se realizará una limpieza de las bases de datos proporcionadas por medio de un lenguaje de programación; con estas se determinarán las entregas a hacer en un día y se obtendrán los domicilios de los clientes, estos serán después geo-codificados para calcular una matriz de distancias todos contra todos.
 
         En conjunto con la matriz de distancias y el volumen de los pedidos de cada cliente se realizará un proceso de optimización con el \texttt{solver} implementado en la librería \texttt{ortools} \cite{google-2021} de libre distribución. Finalmente se desplegará un reporte con el conjunto de rutas encontradas en un mapa en adición a datos generales de la solución propuesta, tales como el volumen muerto y el consumo de gasolina.
 
     \section{Propuesta metodológica} \label{sec:prop-method}
     
-        Para la solución de esta problemática hemos usado el lenguaje de programación Python; para los procesos de lectura, limpieza, exploración y agregación de datos hemos usado la librería \texttt{pandas} \cite{mckinney-proc-scipy-2010} en conjunto con \texttt{matplotlib} \cite{Hunter:2007} y \texttt{seaborn} \cite{Waskom2021}, para la solución del problema de programación lineal usamos la librería \texttt{ortools} \cite{ortools} de Google, y para la visualización de los rutas generadas hemos usado \texttt{folium} \cite{folium}. Una liga al código fuente que hemos desarrollado se encuentra en el apéndice \ref{code:repo}.
+        Para la solución de esta problemática hemos usado el lenguaje de programación \texttt{Python} en su versión 3.8.10; para los procesos de lectura, limpieza, exploración y agregación de datos hemos usado la librería \texttt{pandas} \cite{mckinney-proc-scipy-2010} en conjunto con \texttt{matplotlib} \cite{Hunter:2007} y \texttt{seaborn} \cite{Waskom2021}, para la solución del problema de programación lineal usamos la librería \texttt{ortools} \cite{ortools} de Google, y para la visualización de los rutas generadas hemos usado \texttt{folium} \cite{folium}. Una liga al código fuente que hemos desarrollado se encuentra en el apéndice \ref{code:repo}.
         
         \subsection{Limpieza de la base de datos} \label{stage 1}
             
@@ -178,7 +178,7 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
 
         \subsection{Visualización de rutas} 
             
-            La visualización de rutas se realizó con la API de la librería \texttt{folium} \cite{folium}, con ella hemos generado un mapa de Monterrey en la que se visualizan las rutas que siguen todos los vehículos; el mapa también despliega información del domicilio al que se realiza la entrega, y el volumen total de los productos que debe de recibir.
+            La visualización de rutas se realizó con la API de la librería \texttt{folium} \cite{folium}, con ella hemos generado un mapa de la ciudad en la que se visualizan las rutas que siguen todos los vehículos; el mapa también despliega información del domicilio al que se realiza la entrega, y el volumen total de los productos que debe de recibir.
         
         \subsection{Resumen de resultados}
 
@@ -226,7 +226,7 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
 
         \subsection{Resultados} \label{sec:results}
 
-            Después de correr la aplicación con los parámetros definidos en \ref{sec:parameter-tuning}, se desplegará el navegador el conjunto de rutas de todos los vehículos, en la figura \ref{fig:generated-routes} podemos ver 2 de las rutas encontradas.
+            Después de correr la aplicación con los parámetros definidos en \ref{sec:parameter-tuning}, se desplegará en el navegador el conjunto de rutas de todos los vehículos, en la figura \ref{fig:generated-routes} podemos ver 2 de las rutas encontradas.
         
             \begin{figure}[H]
                 \centering
@@ -235,7 +235,7 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
                 \label{fig:generated-routes}
             \end{figure}
             
-            Como se puede apreciar en la tabla \ref{rutas}, para esta simulación, la aplicación encontró un conjunto de rutas que minimizan la distancia que recorren los camiones en total hasta 226.79 km. En esta solución el vehículo con la ruta más corta viaja 12.86 $km$ y el que tiene la ruta más larga viaja 42.21 $km$, se tiene una huella de carbono de 55 km de $CO_2$; en este tabulado cada una de las filas representa una ruta encontrada por la aplicación.
+            Como se puede apreciar en la tabla \ref{rutas}, para esta simulación, la aplicación encontró un conjunto de rutas que minimizan la distancia que recorren los camiones en total hasta 226.79 km. En esta solución el vehículo con la ruta más corta viaja 12.86 km y el que tiene la ruta más larga viaja 42.21 km, se tiene una huella de carbono de 55 km de $CO_2$; en este tabulado cada una de las filas representa una ruta encontrada por la aplicación.
             
             \begin{table}[h!]
                 \centering
@@ -292,11 +292,11 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
         
     \section{ODS} \label{sec:ods}
     
-        Igual que encontrar la ruta más eficiente para la empresa, buscamos tener un impacto social por esta razón reconocemos la importancia que tiene que la innovación trascienda los objetivos personales, así como a los objetivos colectivos. Por eso mismo, tenemos la intención de tener un impacto positivo en los Objetivos de Desarrollo Sostenible propuestos por la ONU \cite{united-nations-2015}. 
+        Igual que encontrar la ruta más eficiente para la empresa, buscamos tener un impacto social, por esta razón reconocemos la importancia que tiene que la innovación trascienda los objetivos personales, así como a los objetivos colectivos. Por eso mismo, tenemos la intención de tener un impacto positivo en los Objetivos de Desarrollo Sostenible propuestos por la ONU \cite{united-nations-2015}. 
         
         Una de las ODS implementadas en el proyecto es el objetivo número 9,  Industria, Innovación e Infraestructura, ya que los valores de esta ODS se alinean perfectamente con los de nuestro proyecto. Este objetivo tiene como enfoque la construcción de infraestructuras resilientes en forma de rutas adaptables que se basan en las necesidades, la industrialización sostenible en forma de la minimización de kilómetros recorridos y por lo tanto energía ocupada, e innovación de un sistema ya existente. 
         
-        Otro de los objetivos en los que impactamos positivamente es el número 11, Ciudades y Comunidades Sustentables, ya que reconocemos que el mundo está cada vez más urbanizado, y la sostenibilidad no se puede quedar atrás. El e-commerce está cada vez más presente en las vidas de la gente, y al minimizar los efectos negativos de esta industria es el mejor paso que podemos tomar para un futuro verde. 
+        Otro de los objetivos en los que impactamos positivamente es el número 11, Ciudades y Comunidades Sustentables, ya que reconocemos que el mundo está cada vez más urbanizado, y la sostenibilidad no se puede quedar atrás. El e-commerce está cada vez más presente en las vidas de la gente, y el minimizar los efectos negativos de esta industria es el mejor paso que podemos tomar para un futuro verde. 
 
     \section{Recursos utilizados} \label{sec:resources}
         
