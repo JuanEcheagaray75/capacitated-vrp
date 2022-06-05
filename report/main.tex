@@ -14,9 +14,6 @@
 \usepackage{atbegshi} % erase first blank page
 \AtBeginDocument{\AtBeginShipoutNext{\AtBeginShipoutDiscard}}
 
-% Ajustes de paquetes
-
-
 \title{\LARGE \bf Ruteo de entrega de productos para una empresa de e-commerce}
 
 \author{Juan Pablo Echeagaray González, Emily Rebeca Méndez Cruz, \\Carolina Longoria Lozano, Verónica Victoria García De la Fuente \\
@@ -95,13 +92,13 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
                 \text{min } \quad & z = \sum_{k=1}^{V} \sum_{j=1}^{n} \sum_{i=1}^{n} c_{ij} x_{ijk}\\
                 \text{sujeto a: }\quad &
                 \begin{array}{c}
-                    \displaystyle\sum_{i=1}^{n} x_{ijk} = \sum_{i=1}^{n} x_{jik} \\[3pt]
-                    \displaystyle\sum_{k=1}^{V} \sum_{i=1}^{n} x_{ijk} = 1 \\[3pt]
-                    \displaystyle\sum_{j=2}^{n} x_{1jk} = 1 \\[3pt]
-                    \displaystyle\sum_{i=1}^{n} \sum_{j=2}^{n} d_{j} x_{ijk} \leq Q \\[3pt]
-                    u_{j} - u_{i} \geq d_j - Q (1 - x_{ijk}) \\[3pt]
-                    d_i \leq u_i \leq Q \\[3pt]
-                    x_{ijk} \in \{0, 1\}
+                    \displaystyle\sum_{i=1}^{n} x_{ijk} = \sum_{i=1}^{n} x_{jik} \qquad \forall j, k \\[3pt]
+                    \displaystyle\sum_{k=1}^{V} \sum_{i=1}^{n} x_{ijk} = 1 \qquad \forall j \\[3pt]
+                    \displaystyle\sum_{j=2}^{n} x_{1jk} = 1 \qquad \forall k \\[3pt]
+                    \displaystyle\sum_{i=1}^{n} \sum_{j=2}^{n} d_{j} x_{ijk} \leq Q \qquad \forall k\\[3pt]
+                    u_{j} - u_{i} \geq d_j - Q (1 - x_{ijk}) \qquad \forall i, j, k\\[3pt]
+                    d_i \leq u_i \leq Q \qquad \forall i \\[3pt]
+                    x_{ijk} \in \{0, 1\} \qquad \forall i, j, k
                 \end{array}
             \end{aligned}
         \end{equation*}
