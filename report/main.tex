@@ -53,7 +53,7 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
         
     \section{Objeto de estudio} \label{sec:case-study}
 
-        Nuestra implementación se enfoca en resolver el problema de ruteo para la entrega de productos, siendo esto un problema conocido como CVRP (Capacitated Vehicle RoutingProblem); en este se busca encontrar un conjunto de rutas para una flotilla de vehículos que tenga el menor costo de ruta en el que se realicen todas las entregas necesarias. Cada uno de los vehículos de la flotilla sale del mismo centro de distribución, y al final de su ruta debe de regresar a este \cite{elshaer2020taxonomic}.
+        Nuestra implementación se enfoca en resolver el problema de ruteo para la entrega de productos, siendo esto un problema conocido como CVRP (Capacitated Vehicle Routing Problem); en este se busca encontrar un conjunto de rutas para una flotilla de vehículos que tenga el menor costo de ruta en el que se realicen todas las entregas necesarias. Cada uno de los vehículos de la flotilla sale del mismo centro de distribución, y al final de su ruta debe de regresar a este \cite{elshaer2020taxonomic}.
 
         Los vehículos solamente realizarán entregas a los clientes de la empresa, es decir, no habrá etapa alguna de carga de paquetes más que en el centro de distribución; aunado a esto, cada uno de los clientes se visitará una sola vez, esto hace referencia a que si uno de los clientes ordenó más de un producto, se entregarán todas sus ordenes en el momento en que sea visitado, considerando al conjunto de artículos como un solo objeto.
         
@@ -144,7 +144,7 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
     
     \section{Objetivos} \label{sec:objectives}
 
-        El objetivo principal de nuestro trabajo es generar una metodología para resolver el problema de generación de rutas de entrega para una empresa de e-commerce que se acerque a la optimalidad. De forma específica, se desea encontrar un conjunto de $n$ rutas que realicen todas las entregas de 1 día para la empresa, estas rutas deben de minimizar la distancia total recorrida así como respetar las diversas restricciones propias del problema y de la empresa
+        El objetivo principal de nuestro trabajo es generar una metodología para resolver el problema de generación de rutas de entrega para una empresa de e-commerce que se acerque a la optimalidad. De forma específica, se desea encontrar un conjunto de $n$ rutas que realicen todas las entregas de 1 día para la empresa, estas rutas deben de minimizar la distancia total recorrida así como respetar las diversas restricciones propias del problema y de la empresa.
 
     \section{Hipótesis} \label{sec:hyp}
             
@@ -170,11 +170,11 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
 
         \subsection{Cálculo de matriz de distancias} \label{stage 3}
             
-            De las coordenadas de cada domicilio calculamos una matriz de distancia todos contra todos, la distancia a usar es la geodésica. Como función geodésica hemos usada la implementada en el módulo \texttt{distance} de la librería \texttt{Geopy} \cite{geopy} usada para el procesamiento de domicilio, y la matriz de distancia se calcula con la misma a través de la función \texttt{cdist} implementada en el sub-módulo \texttt{spatial} de la librería de cómputo científico \texttt{SciPy} \cite{2020SciPy-NMeth}.
+            De las coordenadas de cada domicilio calculamos una matriz de distancia todos contra todos, la distancia a usar es la geodésica. Como función geodésica hemos utilizado la implementada en el módulo \texttt{distance} de la librería \texttt{Geopy} \cite{geopy}, usada para el procesamiento de domicilio, y la matriz de distancia se calcula con la misma a través de la función \texttt{cdist} implementada en el sub-módulo \texttt{spatial} de la librería de cómputo científico \texttt{SciPy} \cite{2020SciPy-NMeth}.
 
         \subsection{Generación de rutas} \label{stage 4}
         
-            Para la solución del problema hemos usado la librería \texttt{ortools} \cite{ortools} de Google. Hacemos uso de la matriz de distancias calculada en el paso anterior, un listado de cuánto volumen debe de ser entregado a cada uno de los clientes, un número de vehículos a mandar, y su capacidad máxima de carga en metros cúbicos. La solución generada consiste de un listado de las rutas a seguir por cada uno de los vehículos, el volumen total que llevarán, cuál fue la distancia total recorrida por todos los vehículos y cuánta carga llevaron.
+            Para la solución del problema hemos hecho uso de la librería \texttt{ortools} \cite{ortools} de Google. Hacemos uso de la matriz de distancias calculada en el paso anterior, un listado de cuánto volumen debe de ser entregado a cada uno de los clientes, un número de vehículos a mandar, y su capacidad máxima de carga en metros cúbicos. La solución generada consiste de un listado de las rutas a seguir por cada uno de los vehículos, el volumen total que llevarán, cuál fue la distancia total recorrida por todos los vehículos y cuánta carga llevaron.
 
         \subsection{Visualización de rutas} 
             
@@ -197,7 +197,7 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
     
         La red con la que tratamos consta de 193 nodos, 192 referentes a los clientes, y 1 nodo más para el Centro de Distribución. El número de conexiones (aristas) dentro del grafo es $193\choose2$ = $18528$
         
-        Dada la complejidad computacional de resolver de forma exacta un VRP con 193 nodos, deben de utilizarse heurísticos en el proceso de solución. La librería \texttt{ortools} \cite{ortools}le permite al usuario seleccionar 1 heurístico para la obtención de una solución inicial a mejorar, y 1 meta-heurístico para realizar el proceso de optimización. Es también decisión del desarrollador imponer un límite al tiempo de ejecución del que dispone el algoritmo, este parámetro también deberá ser optimizado en base a los resultados generados.
+        Dada la complejidad computacional de resolver de forma exacta un VRP con 193 nodos, deben de utilizarse heurísticos en el proceso de solución. La librería \texttt{ortools} \cite{ortools} le permite al usuario seleccionar un heurístico para la obtención de una solución inicial a mejorar, y un meta-heurístico para realizar el proceso de optimización. Es también decisión del desarrollador imponer un límite al tiempo de ejecución del que dispone el algoritmo, este parámetro también deberá ser optimizado en base a los resultados generados.
 
         Para obtener una solución básica inicial hemos optado por utilizar un algoritmo de naturaleza voraz que selecciona como siguiente nodo a visitar a aquel con el menor costo de ruta asociado; este proceso se repite para cada uno de los vehículos de la flotilla. Como metaheurístico hemos seleccionado una búsqueda local guiada, que de acuerdo a la documentación de la librería \cite{google-2021} suele ser la mejor opción para resolver problemas de ruteo de vehículos.
 
@@ -211,7 +211,7 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
                 \label{fig:optim-curves}
             \end{figure}
 
-            También hemos generado una curva para varianza den cada una de las observaciones:
+            También hemos generado una curva para varianza de cada una de las observaciones en la figura \ref{fig:optim-var}.
 
             \begin{figure}[h!]
                 \centering
@@ -220,7 +220,7 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
                 \label{fig:optim-var}
             \end{figure}
 
-            De estas curvas después se utilizó la librería de \texttt{Python}, \texttt{kneed} \cite{kneed}. En ella se implementa el algoritmo propuesto por Satopaa en Finding a “Kneedle” in a Haystack: Detecting Knee Points in System Behavior \cite{satopaa2011finding}. En la figura \ref{fig:optim-curves} y en la figura \ref{fig:optim-var} se visualiza el punto encontrado.
+            En estas curvas después se utilizó la librería de \texttt{Python}, \texttt{kneed} \cite{kneed}. En ella se implementa el algoritmo propuesto por Satopaa en Finding a “Kneedle” in a Haystack: Detecting Knee Points in System Behavior \cite{satopaa2011finding}. En la figura \ref{fig:optim-curves} y en la figura \ref{fig:optim-var} se visualiza el punto encontrado.
 
             El punto de inflexión de la distancia mínima sugeriría que a partir de 2 segundos esta métrica no cambiará de forma drástica. Sin embargo, en la curva de la varianza este punto se localiza en 4 segundos. Con el fin de asegurar la mayor consistencia, sugerimos que para la generación de rutas se realicen 10 simulaciones con un tiempo máximo de cómputo por simulación de 4 segundos, para después escoger la que tenga la menor distancia asociada.
 
@@ -316,7 +316,7 @@ Dr. Jaime Eduardo Martínez Sánchez}% <-this % stops
     
     \section{Código fuente}\label{code:repo}
     
-        El código generado puede ser consultado \href{https://github.com/JuanEcheagaray75/capacitated-vrp}{aquí}
+        El código generado puede ser consultado \href{https://github.com/JuanEcheagaray75/capacitated-vrp}{aquí}.
     
     \bibliographystyle{IEEEtran}
     \bibliography{references.bib}
