@@ -2,6 +2,10 @@
 
 ## General
 
+- [ ] Implement time window constraints
+- [ ] Test app on Solomon VRP data
+- [ ] Find another library for route visualization
+
 ## Visuals
 
 - [ ] Design a proper dashboard
